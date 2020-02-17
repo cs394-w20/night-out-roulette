@@ -3,8 +3,10 @@ import { StyleSheet, Text, View, Button, Image } from "react-native";
 import GetRestaurant from '../components/Choose'
 
 export default function Roulette({ navigation, route }) {
+  displayRestaurant = false;
   return (
-    <View style={styles.container}>
+    <button display={displayRestaurant ? "none" : "block"} onClick={displayRestaurant = true}>Where's My Night Out?</button>
+    <View display={displayRestaurant ? "block" : "none"} style={styles.container}>
       <Text>{GetRestaurant(route.params.cuisine, route.params.price)['name']}</Text>
       <Image
         source={{
