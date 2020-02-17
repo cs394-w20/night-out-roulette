@@ -1,3 +1,4 @@
+import { REACT_APP_API_KEY } from "react-native-dotenv";
 const data = [
   {
     name: "Dave's New Kitchen",
@@ -99,11 +100,8 @@ export default async function GetRestaurantYelp(
 ) {
   queryString = "https://api.yelp.com/v3/businesses/search?";
 
-  // API
-  queryString = queryString + "Authorization=" + process.env.REACT_APP_API_KEY;
-
   // TERM
-  queryString = queryString + "&term=" + term;
+  queryString = queryString + "term=" + term;
 
   // LATITUDE
   queryString = queryString + "&latitude=" + latitude;
@@ -122,10 +120,14 @@ export default async function GetRestaurantYelp(
 
   // OPEN NOW
   queryString = queryString + "&open_now=" + open_now;
-
   let responseData = [];
   console.log("made it 1");
-  fetch(queryString)
+  fetch(queryString, {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + REACT_APP_API_KEY
+    }
+  })
     .then(response => response.json())
     .then(response => {
       console.log("made it 2");
