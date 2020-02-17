@@ -6,7 +6,7 @@ export default function Roulette({ navigation, route }) {
   displayRestaurant = false;
   return (
     <View>
-      <Button display={displayRestaurant ? "none" : "block"} onClick={displayRestaurant = true}>Where's My Night Out?</Button>
+      <Button title="Where's My Night Out?" display={displayRestaurant ? "none" : "block"} onClick={displayRestaurant = true}>Where's My Night Out?</Button>
     <View display={displayRestaurant ? "block" : "none"} style={styles.container}>
       <Text>{GetRestaurant(route.params.cuisine, route.params.price)['name']}</Text>
       <Image
