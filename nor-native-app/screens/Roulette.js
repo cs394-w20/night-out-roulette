@@ -5,7 +5,8 @@ import GetRestaurant from '../components/Choose'
 export default function Roulette({ navigation, route }) {
   displayRestaurant = false;
   return (
-    <button display={displayRestaurant ? "none" : "block"} onClick={displayRestaurant = true}>Where's My Night Out?</button>
+    <View>
+      <Button display={displayRestaurant ? "none" : "block"} onClick={displayRestaurant = true}>Where's My Night Out?</Button>
     <View display={displayRestaurant ? "block" : "none"} style={styles.container}>
       <Text>{GetRestaurant(route.params.cuisine, route.params.price)['name']}</Text>
       <Image
@@ -15,6 +16,7 @@ export default function Roulette({ navigation, route }) {
         }}
         style={{ width: 400, height: 400 }}
       />
+    </View>
     </View>
   );
 }
