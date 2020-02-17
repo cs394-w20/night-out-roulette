@@ -21,7 +21,7 @@ const data = [
     },
     {
         "name": "The Barn",
-        "cuisine": "Steakhouse",
+        "cuisine": "Steak",
         "price": "$$$$"
     },
     {
