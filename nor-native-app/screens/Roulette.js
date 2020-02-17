@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 
-export default function Roulette({ navigation }) {
+export default function Roulette({ navigation, route }) {
   return (
     <View style={styles.container}>
       <Text>Your Restaurant for tonight is Dave's New Kitchen!</Text>

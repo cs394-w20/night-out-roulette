@@ -1,29 +1,30 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Button, Picker } from "react-native";
 
-export default function Price({ navigation }) {
-  const [state, setstate] = useState({ price: "1" });
+export default function Price({ navigation, route }) {
+  const [state, setstate] = useState({ price: "$", language: route.params.language });
   return (
     <View style={styles.container}>
       <View style={styles.instructions}>
-        <Text style={styles.text}>Choose your cuisine!</Text>
+        <Text style={styles.text}>What's your budget?</Text>
       </View>
       <View style={styles.picker}>
         <Picker
           style={styles.picker}
-          selectedValue={state.language}
+          selectedValue={state.price}
           style={{ height: 50, width: 100 }}
           onValueChange={(itemValue, itemIndex) =>
             setstate({ price: itemValue })
           }
         >
-          <Picker.Item label="$" value="1" />
-          <Picker.Item label="$$" value="2" />
-          <Picker.Item label="$$$" value="3" />
+          <Picker.Item label="$" value="$" />
+          <Picker.Item label="$$" value="$$" />
+          <Picker.Item label="$$$" value="$$$" />
+          <Picker.Item label="$$$$" value="$$$$" />
         </Picker>
       </View>
       <View style={styles.button}>
-        <Button title="Next" onPress={() => navigation.navigate("Roulette")} />
+        <Button title="Next" onPress={() => navigation.navigate("Roulette", {...state})} />
       </View>
     </View>
   );
