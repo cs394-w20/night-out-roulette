@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Button, Picker } from "react-native";
 
 export default function Price({ navigation, route }) {
-  const [state, setstate] = useState({ price: "$", language: route.params.language });
+  const [state, setstate] = useState({ price: "$", cuisine: route.params.cuisine });
+  console.log(state)
   return (
     <View style={styles.container}>
       <View style={styles.instructions}>
@@ -14,7 +15,7 @@ export default function Price({ navigation, route }) {
           selectedValue={state.price}
           style={{ height: 50, width: 100 }}
           onValueChange={(itemValue, itemIndex) =>
-            setstate({ price: itemValue })
+            setstate({...state, price: itemValue })
           }
         >
           <Picker.Item label="$" value="$" />

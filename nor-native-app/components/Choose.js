@@ -71,16 +71,19 @@ const data = [
     }
 ]
 
-const GetRestaurant = (cuisine, price) => {
+export default function GetRestaurant(cuisine, price) {
     let options = [];
+    console.log(cuisine)
+    console.log(price)
 
     for(let i = 0; i < data.length; i++){
-        if (data[i].cuisine.includes(cuisine) == true && data[i].price.length == price){
+        if (data[i].cuisine.includes(cuisine) === true && data[i].price === price){
             options.push(i);
         }
     }
 
     const randomNum = Math.floor(Math.random() * options.length);
+    console.log(options)
 
     return data[options[randomNum]];
 }

@@ -1,10 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
+import GetRestaurant from '../components/Choose'
 
 export default function Roulette({ navigation, route }) {
   return (
     <View style={styles.container}>
-      <Text>Your Restaurant for tonight is Dave's New Kitchen!</Text>
+      <Text>{GetRestaurant(route.params.cuisine, route.params.price)['name']}</Text>
       <Image
         source={{
           uri:
