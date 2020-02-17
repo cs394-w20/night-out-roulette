@@ -82,5 +82,5 @@ const GetRestaurant = (cuisine, price) => {
 
     const randomNum = Math.floor(Math.random() * options.length);
 
-    return options[randomNum];
+    return data[randomNum];
 }
