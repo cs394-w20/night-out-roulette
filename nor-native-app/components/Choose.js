@@ -93,7 +93,8 @@ export default async function GetRestaurantYelp(
   cuisine,
   price,
   term = "food",
-  radius = "10000",
+  radius = "40000",
+  limit = 3,
   latitude = 42.05784,
   longitude = -87.67614,
   open_now = true
@@ -111,6 +112,9 @@ export default async function GetRestaurantYelp(
 
   // RADIUS
   queryString = queryString + "&radius=" + radius;
+
+  // LIMIT
+  queryString = queryString + "&limit=" + limit;
 
   // CATEGORIES
   queryString = queryString + "&categories=" + cuisine.toLowerCase();
@@ -136,7 +140,7 @@ export default async function GetRestaurantYelp(
       const chosenRestaurant = reponseData[randomNum];
 
       chosenRestaurant.cuisine = cuisine;
-      
+
       console.log(chosenRestaurant);
       return chosenRestaurant;
     });
