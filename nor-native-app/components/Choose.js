@@ -116,12 +116,9 @@ const GetRestaurantYelp = async(cuisine, price, term = "food", radius = "10000",
     
     let responseData = [];
 
-    fetch(queryString, {
-        method: "GET"
-    })
+    fetch(queryString)
+    .then(response => response.json())
     .then(response => {
-        responseData = response;
+        console.log(response)
     })
-
-    console.log(responseData);
 }
