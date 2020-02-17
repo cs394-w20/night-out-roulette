@@ -121,7 +121,6 @@ export default async function GetRestaurantYelp(
   // OPEN NOW
   queryString = queryString + "&open_now=" + open_now;
   let responseData = [];
-  console.log("made it 1");
   fetch(queryString, {
     method: "GET",
     headers: {
@@ -130,7 +129,15 @@ export default async function GetRestaurantYelp(
   })
     .then(response => response.json())
     .then(response => {
-      console.log("made it 2");
-      console.log(response);
+      reponseData = response.businesses;
+
+      const randomNum = Math.floor(Math.random() * responseData.length);
+
+      const chosenRestaurant = reponseData[randomNum];
+
+      chosenRestaurant.cuisine = cuisine;
+      
+      console.log(chosenRestaurant);
+      return chosenRestaurant;
     });
 }
