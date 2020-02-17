@@ -92,25 +92,28 @@ const GetRestaurantYelp = async(cuisine, price, term = "food", radius = "10000",
 
     queryString = "https://api.yelp.com/v3/businesses/search?"
 
+    // API
+    queryString = queryString + "Authorization=" + process.env.REACT_APP_API_KEY;
+
     // TERM
-    queryString = queryString + "term=" + term;
+    queryString = queryString + "&term=" + term;
 
     // LATITUDE
     queryString = queryString + "&latitude=" + latitude;
 
-    //LONGITUDE
+    // LONGITUDE
     queryString = queryString + "&longitude=" + longitude;
     
-    //RADIUS
+    // RADIUS
     queryString = queryString + "&radius=" + radius;
 
-    //CATEGORIES
+    // CATEGORIES
     queryString = queryString + "&categories=" + cuisine.toLowerCase();
 
-    //PRICE
+    // PRICE
     queryString = queryString + "&price=" + price.length;
 
-    //OPEN NOW
+    // OPEN NOW
     queryString = queryString + "&open_now=" + open_now;
 
     
