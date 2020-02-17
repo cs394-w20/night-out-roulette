@@ -71,7 +71,7 @@ const data = [
     }
 ]
 
-export default function GetRestaurant(cuisine, price) {
+function GetRestaurant(cuisine, price) {
     let options = [];
     console.log(cuisine)
     console.log(price)
@@ -86,4 +86,42 @@ export default function GetRestaurant(cuisine, price) {
     console.log(options)
 
     return data[options[randomNum]];
+}
+
+const GetRestaurantYelp = async(cuisine, price, term = "food", radius = "10000", latitude = 42.057840, longitude = -87.676140, open_now = true) => {
+
+    queryString = "https://api.yelp.com/v3/businesses/search?"
+
+    // TERM
+    queryString = queryString + "term=" + term;
+
+    // LATITUDE
+    queryString = queryString + "&latitude=" + latitude;
+
+    //LONGITUDE
+    queryString = queryString + "&longitude=" + longitude;
+    
+    //RADIUS
+    queryString = queryString + "&radius=" + radius;
+
+    //CATEGORIES
+    queryString = queryString + "&categories=" + cuisine.toLowerCase();
+
+    //PRICE
+    queryString = queryString + "&price=" + price.length;
+
+    //OPEN NOW
+    queryString = queryString + "&open_now=" + open_now;
+
+    
+    let responseData = [];
+
+    fetch(queryString, {
+        method: "GET"
+    })
+    .then(response => {
+        responseData = response;
+    })
+
+    console.log(responseData);
 }
