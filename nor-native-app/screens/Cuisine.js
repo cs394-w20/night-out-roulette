@@ -37,7 +37,7 @@ export default function Cuisine({ navigation }) {
       <View style={styles.button}>
         <Button
           title="Next"
-          onPress={() => navigation.navigate("Price", { ...state })}
+          onPress={() => navigation.navigate("Distance", { ...state })}
         />
       </View>
     </View>
