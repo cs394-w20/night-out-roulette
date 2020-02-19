@@ -6,7 +6,7 @@ export default function Cuisine({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.instructions}>
-        <Text style={styles.text}>Choose your cuisine!</Text>
+        <Text style={{fontSize: 30, color:"black", marginTop:"5%", textAlign:"center", fontWeight:"600"}}>What are you in the mood for?</Text>
       </View>
       <View style={styles.picker}>
         <Picker

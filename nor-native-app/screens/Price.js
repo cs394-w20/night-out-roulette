@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Button, Picker } from "react-native";
 
 export default function Price({ navigation }) {
-  const [state, setstate] = useState({ price: "1" });
+  const [state, setstate] = useState({ price: "0" });
   return (
     <View style={styles.container}>
       <View style={styles.instructions}>
-        <Text style={styles.text}>Choose your cuisine!</Text>
+        <Text style={{fontFamily:"Helvetica", fontSize:30, color:"black", marginTop:"5%", textAlign:"center", fontWeight:"600"}}>How spendy are you feeling?</Text>
       </View>
       <View style={styles.picker}>
         <Picker
           style={styles.picker}
-          selectedValue={state.language}
+          selectedValue={state.price}
           style={{ height: 50, width: 100 }}
           onValueChange={(itemValue, itemIndex) =>
             setstate({ price: itemValue })
@@ -23,7 +23,7 @@ export default function Price({ navigation }) {
         </Picker>
       </View>
       <View style={styles.button}>
-        <Button title="Next" onPress={() => navigation.navigate("Roulette")} />
+        <Button title="Next" onPress={() => navigation.navigate("Spinner")} />
       </View>
     </View>
   );

@@ -7,20 +7,37 @@ import Home from "./screens/Home";
 import Cuisine from "./screens/Cuisine";
 import Price from "./screens/Price";
 import Roulette from "./screens/Roulette";
+import Spinner from "./screens/Spinner"
+
+import { BlurView } from 'expo-blur';
+
+
+
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}>
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{ title: "Night Out Roulette" }}
+          options={{ title: "Night Out Roulette",
+            // headerTitleAlign: "center",
+            // headerTransparent: true,
+            // headerBackground: () => (
+            //   <BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />
+            // ),
+        
+        }}
         />
         <Stack.Screen name="Cuisine" component={Cuisine} />
         <Stack.Screen name="Price" component={Price} />
         <Stack.Screen name="Roulette" component={Roulette} />
+        <Stack.Screen name="Spinner" component={Spinner} />
       </Stack.Navigator>
     </NavigationContainer>
   );
