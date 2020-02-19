@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Button, Picker } from "react-native";
 
 export default function Cuisine({ navigation }) {
-  const [state, setstate] = useState({ cuisine: "Any" });
+  const [state, setstate] = useState({ cuisine: "American" });
   return (
     <View style={styles.container}>
       <View style={styles.instructions}>
@@ -17,7 +17,6 @@ export default function Cuisine({ navigation }) {
             setstate({ ...state, cuisine: itemValue })
           }
         >
-          <Picker.Item label="Any" value="Any" />
           <Picker.Item label="American" value="newamerican" />
           <Picker.Item label="Barbecue" value="bbq" />
           <Picker.Item label="Chinese" value="Chinese" />
