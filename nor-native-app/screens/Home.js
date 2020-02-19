@@ -16,13 +16,13 @@ export default function Home({ navigation }) {
 
       <Text style={{position:"absolute", fontSize:40, color:"white", top:"10%", textAlign:"center", fontWeight:"900"}}>Night Out Roulette!</Text>
       
-      <TouchableOpacity
+      <Button
         onPress={() => navigation.navigate("Cuisine")}
         style={{position:"absolute", bottom:"15%", left:"20%"}}
         title="Let's go for a spin!">
           
           <Text style={{position:"absolute", color:"#F3B531", fontSize:30, fontWeight:"900"}}></Text>
-      </TouchableOpacity>
+      </Button>
 
     </View>
   );
