@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Button, Picker } from "react-native";
 
 export default function Price({ navigation, route }) {
-  const [state, setstate] = useState({ price: "$", distance: route.params.distance, cuisine: route.params.cuisine });
+  const [state, setstate] = useState({ ...route.params, price: "$" });
   console.log(state)
   return (
     <View style={styles.container}>
       <View style={styles.instructions}>
-        <Text style={{fontFamily:"Helvetica", fontSize:30, color:"black", marginTop:"5%", textAlign:"center", fontWeight:"600"}}>How spendy are you feeling?</Text>
+        <Text style={{fontSize:30, color:"black", marginTop:"5%", textAlign:"center", fontWeight:"600"}}>How spendy are you feeling?</Text>
       </View>
       <View style={styles.picker}>
         <Picker
@@ -25,7 +25,7 @@ export default function Price({ navigation, route }) {
         </Picker>
       </View>
       <View style={styles.button}>
-        <Button title="Next" onPress={() => navigation.navigate("Spinner")} />
+        <Button title="Next" onPress={() => navigation.navigate("Spinner", {...state})} />
       </View>
     </View>
   );

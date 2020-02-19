@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, Picker } from "react-native";
 import Slider from '@react-native-community/slider';
 
 export default function Price({ navigation, route }) {
-  const [state, setstate] = useState({ distance: 5, cuisine: route.params.cuisine });
+  const [state, setstate] = useState({ ...route.params, distance: 5 });
   console.log(state)
   return (
     <View style={styles.container}>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Button, Picker } from "react-native";
 
 export default function Cuisine({ navigation }) {
-  const [state, setstate] = useState({ cuisine: "American" });
+  const [state, setstate] = useState({ cuisine: "newamerican" });
   return (
     <View style={styles.container}>
       <View style={styles.instructions}>

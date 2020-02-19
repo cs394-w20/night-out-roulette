@@ -1,40 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button, Image, Linking, Platform } from "react-native";
-import { REACT_APP_API_KEY } from "react-native-dotenv";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Image, Linking, Platform } from "react-native";
 
 export default function Roulette({ navigation, route }) {
-  const [displayRestaurant, setDisplayRestaurant] = useState(false);
-  const [restaurant, setRestaurant] = useState(null);
+  const [restaurant, setRestaurant] = useState(route.params.restaurant)
 
-  useEffect(() => {
-    var cuisine = route.params.cuisine;
-    var price = route.params.price;
-    let queryString = formQuery(cuisine, price)
-    let responseData = [];
-    fetch(queryString, {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + REACT_APP_API_KEY
-      }
-    })
-    .then(response => response.json())
-    .then(response => {
-      reponseData = response.businesses;
-
-      const randomNum = Math.floor(Math.random() * responseData.length);
-
-      const chosenRestaurant = reponseData[randomNum];
-
-      console.log(chosenRestaurant);
-      setRestaurant(chosenRestaurant)
-    });
-  }, []);
-
-  if(!displayRestaurant || !restaurant) {
+  if(!restaurant) {
     return (
       <View style={styles.container}>
-        <Button title= "Where's My Night Out?" onPress={() => setDisplayRestaurant(!displayRestaurant)}></Button>
+        <Image
+          source={{
+            uri:
+              "https://c6.staticflickr.com/6/5662/30514668293_d33f88e921_b.jpg"
+          }}
+          style={{ width: "100%", height: "100%"}}
+        />
+        <View style={{position:"absolute", top:"0%", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white"}}>
+          <Text style={{fontSize:34, color:"white", marginTop:"15%", marginLeft:"5%", textAlign:"left", fontWeight:"600"}}>
+            No matches found {'\n'}
+            for your filters.
+          </Text>
+          <Image source={require('../assets/new1.gif')}
+                style={{position:"absolute", left:"22%", top:"40%", width:"56%", height:"26%"}}/>
+        </View>
       </View>
     );
   };
@@ -49,34 +36,23 @@ export default function Roulette({ navigation, route }) {
         style={{ width: "100%", height: "100%"}}
       />
       <View style={{position:"absolute", top:"0%", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white"}}>
-        <Text style={{fontFamily:"Helvetica", fontSize:35, color:"white", marginTop:"15%", textAlign:"center", fontWeight:"600"}}>
+        <Text style={{fontSize:35, color:"white", marginTop:"15%", textAlign:"center", fontWeight:"600"}}>
           We Picked a Winner!
         </Text>
 
         {/* Name and Address */}
-        <Text style={{fontSize:25, position:"relative", top:"28%", backgroundColor:"rgba(0,0,0, 0.7)", padding:"8%", fontFamily:"Helvetica", color:"white", textAlign:"center"}}>
-            <Text style={{textTransform:"uppercase", fontWeight:"bold", fontSize:35}}>Ten Mile House</Text>{"\n"}
-          1700 Central St{"\n"}
-          Evanston, IL
+        <Text style={{fontSize:25, position:"relative", top:"28%", backgroundColor:"rgba(0,0,0, 0.7)", padding:"8%", color:"white", textAlign:"center"}}>
+            <Text style={{textTransform:"uppercase", fontWeight:"bold", fontSize:35}}>{restaurant['name']}</Text>{"\n"}
+          {restaurant['location']['display_address'][0]}{"\n"}
+          {restaurant['location']['display_address'][1]}
         </Text>
         
 
-        <Text style={{position:"absolute", fontFamily:"Helvetica", fontSize:24, color:"rgba(220,220,220, 1)", top:"60%", width:"100%", textAlign:"center", fontWeight:"500"}}
+        <Text style={{position:"absolute", fontSize:24, color:"rgba(220,220,220, 1)", top:"60%", width:"100%", textAlign:"center", fontWeight:"500"}}
           onPress={() => {var address = restaurant['location']['display_address'][0].replace(' ', '+') + restaurant['location']['display_address'][1].replace(' ', '+'); 
                                                       Linking.openURL(Platform.select({ ios: 'maps:0,0?q='+address, android: 'geo:0,0?q='+address }))}}
         >
           TAKE ME THERE!
-        </Text>
-
-
-        <Text style={{position:"absolute", fontFamily:"Helvetica", fontSize:24, color:"rgba(220,220,220, 1)", bottom:"10%", width:"100%", textAlign:"center", fontWeight:"500"}}
-          onPress={() => {navigation.navigate("Spinner")
-          // Having to run same code for buggy reasons
-            setTimeout(function() {
-              navigation.navigate("Roulette")
-            }, 2000)}}
-        >
-          Re-roll
         </Text>
       </View>
     </View>
@@ -93,30 +69,3 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
-
-});
-
-function formQuery(
-  cuisine,
-  price,
-  term = "food",
-  radius = "40000",
-  limit = 5,
-  latitude = 42.05784,
-  longitude = -87.67614,
-  open_now = true
-) {
-  let queryString = "https://api.yelp.com/v3/businesses/search?";
-
-  queryString += ("term=" + term);
-  queryString += ("&latitude=" + latitude);
-  queryString += ("&longitude=" + longitude);
-  queryString += ("&radius=" + radius);
-  queryString += ("&limit=" + limit);                         // LIMIT OF NUMBER OF RESTAURANTS
-  queryString += ("&categories=" + cuisine.toLowerCase());
-  queryString += ("&price=" + price.length);
-  queryString += ("&open_now=" + open_now); 
-
-  return queryString;
-  
-}
