@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button, Image, Linking, Platform } from "react-native";
 import { REACT_APP_API_KEY } from "react-native-dotenv";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function Roulette({ navigation, route }) {
   const [displayRestaurant, setDisplayRestaurant] = useState(false);
@@ -40,18 +41,47 @@ export default function Roulette({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <Text>{restaurant['name']}</Text>
       <Image
         source={{
           uri:
-            restaurant['image_url']
+            "https://www.marineroom.com/resourcefiles/homeimages/the-marine-room-restaurant-in-la-jolla-top11.jpg"
         }}
-        style={{ width: 400, height: 400 }}
+        style={{ width: "100%", height: "100%"}}
       />
-      <Button title="Take me there!" onPress={() => {var address = restaurant['location']['display_address'][0].replace(' ', '+') + restaurant['location']['display_address'][1].replace(' ', '+'); 
-                                                      Linking.openURL(Platform.select({ ios: 'maps:0,0?q='+address, android: 'geo:0,0?q='+address }))}}>
-      </Button>
+      <View style={{position:"absolute", top:"0%", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white"}}>
+        <Text style={{fontFamily:"Helvetica", fontSize:35, color:"white", marginTop:"15%", textAlign:"center", fontWeight:"600"}}>
+          We Picked a Winner!
+        </Text>
+
+        {/* Name and Address */}
+        <Text style={{fontSize:25, position:"relative", top:"28%", backgroundColor:"rgba(0,0,0, 0.7)", padding:"8%", fontFamily:"Helvetica", color:"white", textAlign:"center"}}>
+            <Text style={{textTransform:"uppercase", fontWeight:"bold", fontSize:35}}>Ten Mile House</Text>{"\n"}
+          1700 Central St{"\n"}
+          Evanston, IL
+        </Text>
+        
+
+        <Text style={{position:"absolute", fontFamily:"Helvetica", fontSize:24, color:"rgba(220,220,220, 1)", top:"60%", width:"100%", textAlign:"center", fontWeight:"500"}}
+          onPress={() => {var address = restaurant['location']['display_address'][0].replace(' ', '+') + restaurant['location']['display_address'][1].replace(' ', '+'); 
+                                                      Linking.openURL(Platform.select({ ios: 'maps:0,0?q='+address, android: 'geo:0,0?q='+address }))}}
+        >
+          TAKE ME THERE!
+        </Text>
+
+
+        <Text style={{position:"absolute", fontFamily:"Helvetica", fontSize:24, color:"rgba(220,220,220, 1)", bottom:"10%", width:"100%", textAlign:"center", fontWeight:"500"}}
+          onPress={() => {navigation.navigate("Spinner")
+          // Having to run same code for buggy reasons
+            setTimeout(function() {
+              navigation.navigate("Roulette")
+            }, 2000)}}
+        >
+          Re-roll
+        </Text>
+      </View>
     </View>
+
+    
   );
 }
 
@@ -62,6 +92,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   }
+});
+
 });
 
 function formQuery(

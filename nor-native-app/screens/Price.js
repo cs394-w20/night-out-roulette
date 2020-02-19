@@ -7,7 +7,7 @@ export default function Price({ navigation, route }) {
   return (
     <View style={styles.container}>
       <View style={styles.instructions}>
-        <Text style={styles.text}>What's your budget?</Text>
+        <Text style={{fontFamily:"Helvetica", fontSize:30, color:"black", marginTop:"5%", textAlign:"center", fontWeight:"600"}}>How spendy are you feeling?</Text>
       </View>
       <View style={styles.picker}>
         <Picker
@@ -25,7 +25,7 @@ export default function Price({ navigation, route }) {
         </Picker>
       </View>
       <View style={styles.button}>
-        <Button title="Next" onPress={() => navigation.navigate("Roulette", {...state})} />
+        <Button title="Next" onPress={() => navigation.navigate("Spinner")} />
       </View>
     </View>
   );
