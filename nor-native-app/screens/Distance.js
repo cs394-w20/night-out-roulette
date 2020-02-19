@@ -1,31 +1,33 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Button, Picker } from "react-native";
+import Slider from '@react-native-community/slider';
 
 export default function Price({ navigation, route }) {
-  const [state, setstate] = useState({ price: "$", distance: route.params.distance, cuisine: route.params.cuisine });
+  const [state, setstate] = useState({ distance: 5, cuisine: route.params.cuisine });
   console.log(state)
   return (
     <View style={styles.container}>
       <View style={styles.instructions}>
-        <Text style={{fontFamily:"Helvetica", fontSize:30, color:"black", marginTop:"5%", textAlign:"center", fontWeight:"600"}}>How spendy are you feeling?</Text>
+        <Text style={styles.text}>What's your budget?</Text>
       </View>
-      <View style={styles.picker}>
-        <Picker
-          style={styles.picker}
-          selectedValue={state.price}
+      <View style={styles.slider}>
+        <Slider
+          style={styles.slider}
+          minimumValue={0}
+          maximumValue={25}
+          step={.25}
+          minimumTrackTintColor="#dddddd"
+          maximumTrackTintColor="#dddddd"
+          value={state.distance}
           style={{ height: 50, width: 100 }}
-          onValueChange={(itemValue, itemIndex) =>
-            setstate({...state, price: itemValue })
+          onValueChange={(sliderValue) =>
+            setstate({...state, distance: sliderValue })
           }
         >
-          <Picker.Item label="$" value="$" />
-          <Picker.Item label="$$" value="$$" />
-          <Picker.Item label="$$$" value="$$$" />
-          <Picker.Item label="$$$$" value="$$$$" />
-        </Picker>
+        </Slider>
       </View>
       <View style={styles.button}>
-        <Button title="Next" onPress={() => navigation.navigate("Spinner")} />
+        <Button title="Next" onPress={() => navigation.navigate("Price", {...state})} />
       </View>
     </View>
   );
@@ -48,6 +50,10 @@ const styles = StyleSheet.create({
   picker: {
     flex: 3,
     alignItems: "center",
+    justifyContent: "center"
+  },
+  slider: {
+    flex: 3,
     justifyContent: "center"
   },
   button: {

@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./screens/Home";
 import Cuisine from "./screens/Cuisine";
+import Distance from "./screens/Distance"
 import Price from "./screens/Price";
 import Roulette from "./screens/Roulette";
 import Spinner from "./screens/Spinner"
@@ -35,6 +36,7 @@ export default function App() {
         }}
         />
         <Stack.Screen name="Cuisine" component={Cuisine} />
+        {/* <Stack.Screen name='Distance' component={Distance} /> */}
         <Stack.Screen name="Price" component={Price} />
         <Stack.Screen name="Roulette" component={Roulette} />
         <Stack.Screen name="Spinner" component={Spinner} />
