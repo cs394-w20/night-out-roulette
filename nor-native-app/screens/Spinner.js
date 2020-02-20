@@ -9,7 +9,8 @@ export default function Spinner({ navigation, route }) {
   useEffect(() => {
     var cuisine = route.params.cuisine;
     var price = route.params.price;
-    let queryString = formQuery(cuisine, price);
+    var distance = route.params.distance;
+    let queryString = formQuery(cuisine, price, distance * 1600);
     let responseData = []
     console.log(queryString)
     fetch(queryString, {
@@ -76,8 +77,8 @@ const styles = StyleSheet.create({
 function formQuery(
   cuisine,
   price,
+  distance,
   term = "food",
-  radius = "40000",
   limit = 3,
   latitude = 42.05784,
   longitude = -87.67614,
@@ -88,7 +89,7 @@ function formQuery(
   queryString += ("term=" + term);
   queryString += ("&latitude=" + latitude);
   queryString += ("&longitude=" + longitude);
-  queryString += ("&radius=" + radius);
+  queryString += ("&radius=" + distance);
   queryString += ("&limit=" + limit);                         // LIMIT OF NUMBER OF RESTAURANTS
   queryString += ("&categories=" + cuisine.toLowerCase());
   queryString += ("&price=" + price.length);
