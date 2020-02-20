@@ -17,7 +17,7 @@ export default function Distance({ navigation, route }) {
           step={.25}
           minimumTrackTintColor="#999999"
           maximumTrackTintColor="#aaaaaa"
-          value={state.distance}
+          value={5}
           style={{ height: 50, width: 350 }}
           onValueChange={(sliderValue) =>
             setstate({...state, distance: sliderValue })

@@ -50,13 +50,15 @@ export default function Spinner({ navigation, route }) {
         }}
         style={{ width: "100%", height: "100%"}}
       />
-      <View style={{position:"absolute", top:"0%", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white", justifyContent:"center"}}>
-        <Text style={{position:'relative', bottom:'20%', left:"2.5%", fontSize:34, color:"white", textAlign:"left", fontWeight:"600"}}>
+      <View style={{position:"absolute", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
+        <Text style={{position:'relative', top:"7.5%", fontSize:34, color:"white", textAlign:"left", fontWeight:"600", flex:1}}>
           Hang tight.{"\n"}
           We're placing your bet!
         </Text>
-        <Image source={require('../assets/new1.gif')}
-               style={{position:"relative",  left:"20%", height:"35%", aspectRatio:1}}/>
+        <View style={{flex:4, justifyContent: 'center', alignItems: 'center'}}>
+          <Image source={require('../assets/new1.gif')}
+                style={{position:"relative",  height:"50%", aspectRatio:1}}/>
+        </View>
       </View>
     </View>
   );
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
-  }
+  },
 })
 
 function formQuery(

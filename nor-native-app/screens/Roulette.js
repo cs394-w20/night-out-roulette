@@ -15,7 +15,7 @@ export default function Roulette({ navigation, route }) {
           style={{ width: "100%", height: "100%"}}
         />
       <View style={{position:"absolute", top:"0%", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white", justifyContent:"center"}}>
-          <Text style={{position:'relative', bottom:'40%', left:"10%", fontSize:34, color:"white", textAlign:"left", fontWeight:"600"}}>
+          <Text style={{position:'relative', bottom:'35%', left:"10%", fontSize:34, color:"white", textAlign:"left", fontWeight:"600"}}>
             No matches found.
           </Text>
         </View>
@@ -32,7 +32,7 @@ export default function Roulette({ navigation, route }) {
         }}
         style={{ width: "100%", height: "100%"}}
       />
-      <View style={{position:"absolute", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white", flexDirection:"column", alignItems:"center"}}>
+      <View style={{position:"absolute", paddingTop:"5%", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white", flexDirection:"column", alignItems:"center"}}>
         <Text style={{position:'relative', flex:1, top:"5%", fontSize:34, color:"white", textAlign:"left", fontWeight:"600"}}>
           We Picked a Winner!
         </Text>
@@ -48,13 +48,15 @@ export default function Roulette({ navigation, route }) {
 
         </Text>
 
-        <TouchableOpacity
-          onPress={() => openRestaurant(restaurant['location']['display_address'])}
-          style={{flex: 1}}>
-            <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", top:"35%", width:"100%", textAlign:"center", fontWeight:"500"}}>
-              TAKE ME THERE!
-            </Text>
-        </TouchableOpacity>
+        <View style={{flex: 1, top:"10%", width:"70%",}}>
+          <TouchableOpacity
+            onPress={() => openRestaurant(restaurant['location']['display_address'])}
+            style={styles.button}>
+              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", fontWeight:"500", borderRadius:1}}>
+                TAKE ME THERE!
+              </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -72,7 +74,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
-  }
+  },
+  button: {
+    backgroundColor: 'rgba(0,0,0, 0.6)',
+    marginLeft: 10,
+    marginRight: 10,
+    borderRadius: 50
+  },
 });
 
 function openRestaurant(display_address) {

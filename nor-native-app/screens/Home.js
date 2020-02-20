@@ -14,14 +14,20 @@ export default function Home({ navigation }) {
         style={{position:"absolute", width: "100%", height: "100%", opacity:1}}
       />
 
-      <Text style={{position:"relative", fontSize:40, color:"white", bottom:"37.5%", textAlign:"center", fontWeight:"900"}}>Night Out Roulette!</Text>
+      <Text style={{position:"relative", fontSize:40, color:"white", bottom:"35%", textAlign:"center", fontWeight:"900"}}>
+        Night Out Roulette!
+      </Text>
       
-      <TouchableOpacity
-        onPress={() => navigation.navigate("Cuisine")}
-        style={{position:"relative", top:"35%", zIndex:1}}>
-          
-          <Text style={{position:"relative", color:"#F3B531", fontSize:30, fontWeight:"900"}}>Let's go for a spin!</Text>
-      </TouchableOpacity>
+      <View style={{top:"35%", width:"80%"}}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Cuisine")}
+          style={styles.button}>
+            
+            <Text style={{position:"relative", color:"rgba(220,220,220, 1)", textAlign:"center", fontSize:30, fontWeight:"900"}}>
+              Let's go for a spin!
+            </Text>
+        </TouchableOpacity>
+      </View>
 
     </View>
   );
@@ -33,5 +39,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
-  }
+  },
+  button: {
+    backgroundColor: 'rgba(0,0,0, 0.6)',
+    marginLeft: 10,
+    marginRight: 10,
+    borderRadius: 50
+  },
 });
