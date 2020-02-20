@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Image, Linking, Platform } from "react-native";
+import { StyleSheet, Text, View, Image, Linking, Platform, TouchableOpacity } from "react-native";
 
 export default function Roulette({ navigation, route }) {
   const [restaurant, setRestaurant] = useState(route.params.restaurant)
@@ -32,30 +32,39 @@ export default function Roulette({ navigation, route }) {
         }}
         style={{ width: "100%", height: "100%"}}
       />
-      <View style={{position:"absolute", top:"0%", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white"}}>
-        <Text style={{fontSize:35, color:"white", marginTop:"15%", textAlign:"center", fontWeight:"600"}}>
+      <View style={{position:"absolute", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white", flexDirection:"column", alignItems:"center"}}>
+        <Text style={{position:'relative', flex:1, top:"5%", fontSize:34, color:"white", textAlign:"left", fontWeight:"600"}}>
           We Picked a Winner!
         </Text>
 
         {/* Name and Address */}
-        <Text style={{fontSize:25, position:"relative", top:"2.5%", backgroundColor:"rgba(0,0,0, 0.7)", padding:"8%", color:"white", textAlign:"center"}}>
+        <Text style={{flex:1, fontSize:25, position:"relative", backgroundColor:"rgba(0,0,0, 0.6)", bottom:"3%", paddingVertical:"5%", width:"100%", color:"white", textAlign:"center"}}>
             <Text style={{textTransform:"uppercase", fontWeight:"bold", fontSize:35}}>{restaurant['name']}</Text>{"\n"}
           {restaurant['location']['display_address'][0]}{"\n"}
           {restaurant['location']['display_address'][1]}
         </Text>
-        
 
-        <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", top:"35%", width:"100%", textAlign:"center", fontWeight:"500"}}
+        <Text style={{flex:2}}>
+
+        </Text>
+
+        <TouchableOpacity
+          onPress={() => openRestaurant(restaurant['location']['display_address'])}
+          style={{flex: 1}}>
+            <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", top:"35%", width:"100%", textAlign:"center", fontWeight:"500"}}>
+              TAKE ME THERE!
+            </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+
+{/* <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", top:"35%", width:"100%", textAlign:"center", fontWeight:"500"}}
           onPress={() => {openRestaurant(restaurant['location']['display_address'])}}
         >
           TAKE ME THERE!
-        </Text>
-      </View>
-    </View>
-
-    
-  );
-}
+        </Text> */}
 
 const styles = StyleSheet.create({
   container: {
@@ -68,8 +77,6 @@ const styles = StyleSheet.create({
 
 function openRestaurant(display_address) {
   var address = '';
-  for(d in display_address) {
-    address += d.replace(' ', '+');
-  }
+  address += display_address[0];
   Linking.openURL(Platform.select({ ios: 'maps:0,0?q='+address, android: 'geo:0,0?q='+address}));
 }
