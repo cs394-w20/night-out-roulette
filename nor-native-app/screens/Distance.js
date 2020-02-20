@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Button, Slider } from "react-native";
-//import { Slider } from '@react-native-community/slider';
 
 export default function Distance({ navigation, route }) {
   const [state, setstate] = useState({ ...route.params, distance: 5 });

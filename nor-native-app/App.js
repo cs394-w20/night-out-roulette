@@ -10,8 +10,6 @@ import Price from "./screens/Price";
 import Roulette from "./screens/Roulette";
 import Spinner from "./screens/Spinner"
 
-import { BlurView } from 'expo-blur';
-
 
 
 const Stack = createStackNavigator();
@@ -36,7 +34,7 @@ export default function App() {
         }}
         />
         <Stack.Screen name="Cuisine" component={Cuisine} />
-        { <Stack.Screen name="Distance" component={Distance} /> }
+        <Stack.Screen name="Distance" component={Distance} />
         <Stack.Screen name="Price" component={Price} />
         <Stack.Screen name="Spinner" component={Spinner} />
         <Stack.Screen name="Roulette" component={Roulette} />

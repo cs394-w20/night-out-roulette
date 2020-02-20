@@ -14,13 +14,10 @@ export default function Roulette({ navigation, route }) {
           }}
           style={{ width: "100%", height: "100%"}}
         />
-        <View style={{position:"absolute", top:"0%", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white"}}>
-          <Text style={{fontSize:34, color:"white", marginTop:"15%", marginLeft:"5%", textAlign:"left", fontWeight:"600"}}>
-            No matches found {'\n'}
-            for your filters.
+      <View style={{position:"absolute", top:"0%", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white", justifyContent:"center"}}>
+          <Text style={{position:'relative', bottom:'40%', left:"10%", fontSize:34, color:"white", textAlign:"left", fontWeight:"600"}}>
+            No matches found.
           </Text>
-          <Image source={require('../assets/new1.gif')}
-                style={{position:"absolute", left:"22%", top:"40%", width:"56%", height:"26%"}}/>
         </View>
       </View>
     );
@@ -41,16 +38,15 @@ export default function Roulette({ navigation, route }) {
         </Text>
 
         {/* Name and Address */}
-        <Text style={{fontSize:25, position:"relative", top:"28%", backgroundColor:"rgba(0,0,0, 0.7)", padding:"8%", color:"white", textAlign:"center"}}>
+        <Text style={{fontSize:25, position:"relative", top:"2.5%", backgroundColor:"rgba(0,0,0, 0.7)", padding:"8%", color:"white", textAlign:"center"}}>
             <Text style={{textTransform:"uppercase", fontWeight:"bold", fontSize:35}}>{restaurant['name']}</Text>{"\n"}
           {restaurant['location']['display_address'][0]}{"\n"}
           {restaurant['location']['display_address'][1]}
         </Text>
         
 
-        <Text style={{position:"absolute", fontSize:24, color:"rgba(220,220,220, 1)", top:"60%", width:"100%", textAlign:"center", fontWeight:"500"}}
-          onPress={() => {var address = restaurant['location']['display_address'][0].replace(' ', '+') + restaurant['location']['display_address'][1].replace(' ', '+'); 
-                                                      Linking.openURL(Platform.select({ ios: 'maps:0,0?q='+address, android: 'geo:0,0?q='+address }))}}
+        <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", top:"35%", width:"100%", textAlign:"center", fontWeight:"500"}}
+          onPress={() => {openRestaurant(restaurant['location']['display_address'])}}
         >
           TAKE ME THERE!
         </Text>
@@ -69,3 +65,11 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
+
+function openRestaurant(display_address) {
+  var address = '';
+  for(d in display_address) {
+    address += d.replace(' ', '+');
+  }
+  Linking.openURL(Platform.select({ ios: 'maps:0,0?q='+address, android: 'geo:0,0?q='+address}));
+}

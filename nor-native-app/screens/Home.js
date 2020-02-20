@@ -14,15 +14,14 @@ export default function Home({ navigation }) {
         style={{position:"absolute", width: "100%", height: "100%", opacity:1}}
       />
 
-      <Text style={{position:"absolute", fontSize:40, color:"white", top:"10%", textAlign:"center", fontWeight:"900"}}>Night Out Roulette!</Text>
+      <Text style={{position:"relative", fontSize:40, color:"white", bottom:"37.5%", textAlign:"center", fontWeight:"900"}}>Night Out Roulette!</Text>
       
-      <Button
+      <TouchableOpacity
         onPress={() => navigation.navigate("Cuisine")}
-        style={{position:"absolute", bottom:"15%", left:"20%"}}
-        title="Let's go for a spin!">
+        style={{position:"relative", top:"35%", zIndex:1}}>
           
-          <Text style={{position:"absolute", color:"#F3B531", fontSize:30, fontWeight:"900"}}></Text>
-      </Button>
+          <Text style={{position:"relative", color:"#F3B531", fontSize:30, fontWeight:"900"}}>Let's go for a spin!</Text>
+      </TouchableOpacity>
 
     </View>
   );
