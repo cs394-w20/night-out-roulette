@@ -26,7 +26,8 @@ export default function Price({ navigation, route }) {
         <Text style={styles.text}>How spendy are you feeling?</Text>
       </View>
       <View style={styles.pickerContainer}>
-        <FlatList style={{flex:1, marginVertical:"2.5%"}}
+        <FlatList style={{ flex: 1, marginVertical: "2.5%", width: "100%" }}
+                  contentContainerStyle={{width:"100%", alignItems:"center"}} 
                   data={['$', '$$', '$$$', '$$$$']}
                   renderItem={({ item }) => <Item title={item} selected={state.price == item} onSelect={onSelect} />}
                   keyExtractor={item => item}/>
