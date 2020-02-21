@@ -54,6 +54,7 @@ export default function Distance({ navigation, route }) {
 
 const styles = StyleSheet.create({
   labelBar: {
+    flex: 1,
     height: 30,
     flexDirection: 'row',
     justifyContent: 'space-between',
