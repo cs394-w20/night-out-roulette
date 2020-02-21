@@ -54,7 +54,7 @@ export default function Roulette({ navigation, route }) {
           {restaurant['location']['display_address'][1]}
         </Text>
 
-        <Text style={{flex:2}}>
+        <Text style={{flex:1.5}}>
 
         </Text>
 
