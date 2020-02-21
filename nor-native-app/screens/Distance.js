@@ -11,13 +11,18 @@ export default function Distance({ navigation, route }) {
           uri:
             "https://c6.staticflickr.com/6/5662/30514668293_d33f88e921_b.jpg"
         }}
-        style={{ width: "100%", height: "100%"}}
+        style={{ width: "100%", height: "100%" }}
       />
-      <View style={{position:"absolute", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
+      <View style={{ position: "absolute", width: "100%", height: "100%", backgroundColor: "rgba(0,0,0, 0.6)", color: "white", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
         <View style={styles.instructions}>
           <Text style={styles.text}>How far can you go?</Text>
         </View>
         <View style={styles.slider}>
+          <View style={styles.labelBar}>
+            <Text style={[styles.text, { color: 'lightgrey' }]}>
+              {state.distance}mi {"\n"}
+            </Text>
+          </View>
           <Slider
             minimumValue={1}
             maximumValue={25}
@@ -27,33 +32,18 @@ export default function Distance({ navigation, route }) {
             value={5}
             style={{ height: 50, width: 350 }}
             onValueChange={(sliderValue) =>
-              setstate({...state, distance: sliderValue })
+              setstate({ ...state, distance: sliderValue })
             }
           >
           </Slider>
-          <View style={styles.labelBar}>
-            {/* <View style={styles.leftContainer}>
-              <Text style={[styles.text, {textAlign: 'left'}]}>
-                1mi
-              </Text>
-            </View> */}
-            <Text style={[styles.text, {color: 'lightgrey'}]}>
-              {state.distance}mi
-            </Text>
-            {/* <View style={styles.rightContainer}>
-              <Text style={[styles.text, {textAlign: 'right'}]}>
-                25mi
-              </Text>
-            </View> */}
-          </View>
         </View>
-        <View style={{flex:1, top:"3.75%", width:"80%"}}>
+        <View style={{ flex: 1, top: "3.75%", width: "80%" }}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("Price", {...state})}
+            onPress={() => navigation.navigate("Price", { ...state })}
             style={styles.button}>
-              
-              <Text style={{position:"relative", color:"rgba(220,220,220, 1)", textAlign:"center", fontSize:24, fontWeight:"900"}}>
-                Next
+
+            <Text style={{ position: "relative", color: "rgba(220,220,220, 1)", textAlign: "center", fontSize: 24, fontWeight: "900" }}>
+              Next
               </Text>
           </TouchableOpacity>
         </View>
@@ -64,25 +54,12 @@ export default function Distance({ navigation, route }) {
 
 const styles = StyleSheet.create({
   labelBar: {
-    flex: 1,
     height: 30,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    justifyContent:'center'
+    justifyContent: 'center'
   },
-  // leftContainer: {
-  //   flex: 1,
-  //   flexDirection: 'row',
-  //   justifyContent: 'flex-start',
-  //   left: "1%"
-  // },
-  // rightContainer: {
-  //   flex: 1,
-  //   flexDirection: 'row',
-  //   justifyContent: 'flex-end',
-  //   right:"1%"
-  // },
   container: {
     flex: 1,
     backgroundColor: "#000",
@@ -95,19 +72,19 @@ const styles = StyleSheet.create({
     marginTop: 30
   },
   text: {
-    fontSize:40, 
-    color:"white", 
-    marginTop:"5%", 
-    textAlign:"center", 
-    fontWeight:"900"
+    fontSize: 40,
+    color: "white",
+    marginTop: "5%",
+    textAlign: "center",
+    fontWeight: "600"
   },
   slider: {
-    flex: 2,
+    flex: 3,
     justifyContent: "center"
   },
   button: {
     backgroundColor: 'rgba(33, 73, 125, 0.6)',
-    padding:10,
+    padding: 10,
     borderRadius: 50
   },
 });

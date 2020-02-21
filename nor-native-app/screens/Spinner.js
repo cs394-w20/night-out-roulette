@@ -49,7 +49,7 @@ export default function Spinner({ navigation, route }) {
         }}
         style={{ width: "100%", height: "100%"}}
       />
-      <View style={{position:"absolute", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
+      <View style={{position:"absolute", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.6)", color:"white", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
         <Text style={{position:'relative', top:"7.5%", fontSize:34, color:"white", textAlign:"left", fontWeight:"600", flex:1}}>
           Hang tight.{"\n"}
           We're placing your bet!

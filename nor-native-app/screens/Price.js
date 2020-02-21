@@ -29,7 +29,7 @@ export default function Price({ navigation, route }) {
         }}
         style={{ width: "100%", height: "100%"}}
       />
-      <View style={{position:"absolute", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
+      <View style={{position:"absolute", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.6)", color:"white", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
         <View style={styles.instructions}>
           <Text style={styles.text}>How spendy are you feeling?</Text>
         </View>
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     color:"white", 
     marginTop:"5%", 
     textAlign:"center", 
-    fontWeight:"900"
+    fontWeight:"600"
   },
   pickerContainer: {
     width: "100%",
