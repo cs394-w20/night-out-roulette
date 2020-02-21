@@ -36,12 +36,8 @@ export default function Spinner({ navigation, route }) {
     });
   }, []);
 
-  // setTimeout(function() {
-  //   navigation.navigate("Roulette", {restaurant: restaurant})
-  // }, 10000)
-
   if(restaurant !== null) {
-    navigation.navigate("Roulette", {restaurant: restaurant})
+    setTimeout(function() {navigation.navigate("Roulette", {restaurant: restaurant})}, 1500);
   }
 
   return (
@@ -53,13 +49,15 @@ export default function Spinner({ navigation, route }) {
         }}
         style={{ width: "100%", height: "100%"}}
       />
-      <View style={{position:"absolute", top:"0%", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white"}}>
-        <Text style={{fontSize:34, color:"white", marginTop:"15%", marginLeft:"5%", textAlign:"left", fontWeight:"600"}}>
+      <View style={{position:"absolute", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.6)", color:"white", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
+        <Text style={{position:'relative', top:"7.5%", fontSize:34, color:"white", textAlign:"left", fontWeight:"600", flex:1}}>
           Hang tight.{"\n"}
           We're placing your bet!
         </Text>
-        <Image source={require('../assets/new1.gif')}
-               style={{position:"absolute", left:"22%", top:"40%", width:"56%", height:"26%"}}/>
+        <View style={{flex:4, justifyContent: 'center', alignItems: 'center'}}>
+          <Image source={require('../assets/new1.gif')}
+                style={{position:"relative",  height:"50%", aspectRatio:1}}/>
+        </View>
       </View>
     </View>
   );
@@ -71,7 +69,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
-  }
+  },
 })
 
 function formQuery(
@@ -79,7 +77,7 @@ function formQuery(
   price,
   distance,
   term = "food",
-  limit = 3,
+  limit = 5,
   latitude = 42.05784,
   longitude = -87.67614,
   open_now = true

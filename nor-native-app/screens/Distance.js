@@ -1,48 +1,52 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button, Slider } from "react-native";
-//import { Slider } from '@react-native-community/slider';
+import { StyleSheet, Text, View, TouchableOpacity, Slider, Image } from "react-native";
 
 export default function Distance({ navigation, route }) {
   const [state, setstate] = useState({ ...route.params, distance: 5 });
   console.log(state)
   return (
     <View style={styles.container}>
-      <View style={styles.instructions}>
-        <Text style={styles.text}>How far can you go?</Text>
-      </View>
-      <View style={styles.slider}>
-        <Slider
-          style={styles.slider}
-          minimumValue={1}
-          maximumValue={25}
-          step={.25}
-          minimumTrackTintColor="#999999"
-          maximumTrackTintColor="#aaaaaa"
-          value={state.distance}
-          style={{ height: 50, width: 350 }}
-          onValueChange={(sliderValue) =>
-            setstate({...state, distance: sliderValue })
-          }
-        >
-        </Slider>
-      <View style={styles.labelBar}>
-        <View style={styles.leftContainer}>
-          <Text style={[styles.text, {textAlign: 'left'}]}>
-            1mi
-          </Text>
+      <Image
+        source={{
+          uri:
+            "https://c6.staticflickr.com/6/5662/30514668293_d33f88e921_b.jpg"
+        }}
+        style={{ width: "100%", height: "100%" }}
+      />
+      <View style={{ position: "absolute", width: "100%", height: "100%", backgroundColor: "rgba(0,0,0, 0.6)", color: "white", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+        <View style={styles.instructions}>
+          <Text style={styles.text}>How far can you go?</Text>
         </View>
-        <Text style={[styles.text, {color: 'grey'}]}>
-          {state.distance}mi
-        </Text>
-        <View style={styles.rightContainer}>
-          <Text style={[styles.text, {textAlign: 'right'}]}>
-            25mi
-          </Text>
+        <View style={styles.slider}>
+          <View style={styles.labelBar}>
+            <Text style={[styles.text, { color: 'lightgrey' }]}>
+              {state.distance}mi {"\n"}
+            </Text>
+          </View>
+          <Slider
+            minimumValue={1}
+            maximumValue={25}
+            step={.25}
+            minimumTrackTintColor="#ffffff"
+            maximumTrackTintColor="#aaaaaa"
+            value={5}
+            style={{ height: 50, width: 350 }}
+            onValueChange={(sliderValue) =>
+              setstate({ ...state, distance: sliderValue })
+            }
+          >
+          </Slider>
         </View>
-      </View>
-      </View>
-      <View style={styles.button}>
-        <Button title="Next" onPress={() => navigation.navigate("Price", {...state})} />
+        <View style={{ flex: 1, top: "3.75%", width: "80%" }}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Price", { ...state })}
+            style={styles.button}>
+
+            <Text style={{ position: "relative", color: "rgba(220,220,220, 1)", textAlign: "center", fontSize: 24, fontWeight: "900" }}>
+              Next
+              </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -50,25 +54,18 @@ export default function Distance({ navigation, route }) {
 
 const styles = StyleSheet.create({
   labelBar: {
+    flex: 1,
     height: 30,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  leftContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-start'
-  },
-  rightContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#000",
+    alignItems: "center",
+    justifyContent: "center",
   },
   instructions: {
     alignItems: "center",
@@ -76,13 +73,19 @@ const styles = StyleSheet.create({
     marginTop: 30
   },
   text: {
-    fontWeight: "bold",
-    fontSize: 20
+    fontSize: 40,
+    color: "white",
+    marginTop: "5%",
+    textAlign: "center",
+    fontWeight: "600"
   },
   slider: {
+    flex: 3,
     justifyContent: "center"
   },
   button: {
-    flex: 1
-  }
+    backgroundColor: 'rgba(33, 73, 125, 0.6)',
+    padding: 10,
+    borderRadius: 50
+  },
 });

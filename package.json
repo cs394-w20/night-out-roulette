@@ -10,6 +10,7 @@
     "firebase": "^7.8.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-native-lightweight-responsive": "0.0.6",
     "react-scripts": "3.4.0"
   },
   "scripts": {
