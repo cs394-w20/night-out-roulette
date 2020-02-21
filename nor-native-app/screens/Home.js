@@ -23,7 +23,7 @@ export default function Home({ navigation }) {
           onPress={() => navigation.navigate("Cuisine")}
           style={styles.button}>
             
-            <Text style={{position:"relative", color:"rgba(220,220,220, 1)", textAlign:"center", fontSize:30, fontWeight:"900"}}>
+            <Text style={{position:"relative", color:"rgba(220,220,220, 1)", textAlign:"center", fontSize:24, fontWeight:"900"}}>
               Let's go for a spin!
             </Text>
         </TouchableOpacity>
@@ -41,9 +41,8 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   button: {
-    backgroundColor: 'rgba(0,0,0, 0.6)',
-    marginLeft: 10,
-    marginRight: 10,
+    backgroundColor: 'rgba(33, 73, 125, 0.5)',
+    padding:10,
     borderRadius: 50
   },
 });

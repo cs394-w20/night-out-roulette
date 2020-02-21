@@ -32,8 +32,8 @@ export default function Spinner({ navigation, route }) {
       const chosenRestaurant = responseData[randomNum];
 
       console.log(chosenRestaurant);
-      setRestaurant(chosenRestaurant)
-      // setRestaurant(false)
+      // setRestaurant(chosenRestaurant)
+      setRestaurant(false)
     });
   }, []);
 

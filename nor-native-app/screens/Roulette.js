@@ -14,10 +14,20 @@ export default function Roulette({ navigation, route }) {
           }}
           style={{ width: "100%", height: "100%"}}
         />
-      <View style={{position:"absolute", top:"0%", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white", justifyContent:"center"}}>
-          <Text style={{position:'relative', bottom:'35%', left:"10%", fontSize:34, color:"white", textAlign:"left", fontWeight:"600"}}>
+        <View style={{position:"absolute", paddingTop:"5%", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white", flexDirection:"column", alignItems:"center"}}>
+          <Text style={{position:'relative', flex:1, top:"5%", fontSize:34, color:"white", textAlign:"left", fontWeight:"600"}}>
             No matches found.
           </Text>
+          <Text style={{flex:3}}/>
+          <View style={{flex: 1.25, top:"10%", width:"70%",}}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Cuisine')}
+              style={styles.button}>
+                <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", fontWeight:"900"}}>
+                  Try Again?
+                </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     );
@@ -48,11 +58,11 @@ export default function Roulette({ navigation, route }) {
 
         </Text>
 
-        <View style={{flex: 1, top:"10%", width:"70%",}}>
+        <View style={{flex: 1.25, top:"10%", width:"70%",}}>
           <TouchableOpacity
             onPress={() => openRestaurant(restaurant['location']['display_address'])}
             style={styles.button}>
-              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", fontWeight:"500", borderRadius:1}}>
+              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", fontWeight:"900"}}>
                 TAKE ME THERE!
               </Text>
           </TouchableOpacity>
@@ -76,9 +86,8 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   button: {
-    backgroundColor: 'rgba(0,0,0, 0.6)',
-    marginLeft: 10,
-    marginRight: 10,
+    backgroundColor: 'rgba(33, 73, 125, 0.5)',
+    padding:10,
     borderRadius: 50
   },
 });
