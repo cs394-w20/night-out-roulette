@@ -1,30 +1,35 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Button, Picker, TouchableOpacity } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 
 export default function Price({ navigation, route }) {
   const [state, setstate] = useState({ ...route.params, price: "$" });
-  console.log(state)
+  
+  function Item({ title, selected, onSelect }) {
+    return (
+      <TouchableOpacity onPress={() => onSelect(title)} style={[styles.item, {backgroundColor: selected? 'rgba(33, 73, 125, 1.0)' : 'rgba(33, 73, 125, 0.7)'}]}>
+        <Text style={styles.title}>{title}</Text>
+      </TouchableOpacity>
+    );
+  }
+  
+  const onSelect = React.useCallback(
+    id => {
+      setstate({...state, price: id});
+    },
+    [state],
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.instructions}>
         <Text style={styles.text}>How spendy are you feeling?</Text>
       </View>
       <View style={styles.pickerContainer}>
-        <Text style={{flex:2}}/>
-        <Picker
-          style={styles.picker}
-          itemStyle={{ backgroundColor: "black", color: "white", }}
-          selectedValue={state.price}
-          onValueChange={(itemValue, itemIndex) =>
-            setstate({...state, price: itemValue })
-          }
-        >
-          <Picker.Item label="$" value="$" />
-          <Picker.Item label="$$" value="$$" />
-          <Picker.Item label="$$$" value="$$$" />
-          <Picker.Item label="$$$$" value="$$$$" />
-        </Picker>
-        <Text style={{flex:2}}/>
+        <FlatList style={{flex:1, marginVertical:"2.5%"}}
+                  data={['$', '$$', '$$$', '$$$$']}
+                  renderItem={({ item }) => <Item title={item} selected={state.price == item} onSelect={onSelect} />}
+                  keyExtractor={item => item}/>
       </View>
       <View style={{flex:1, top:"3.75%", width:"80%"}}>
         <TouchableOpacity
@@ -71,12 +76,24 @@ const styles = StyleSheet.create({
     position:"relative",
     width:"33%",
     flex:1,
-    backgroundColor: "#21497D",
     color:"white",
   },
   button: {
-    backgroundColor: 'rgba(33, 73, 125, 0.5)',
+    backgroundColor: 'rgba(33, 73, 125, 0.6)',
     padding:10,
     borderRadius: 50
+  },
+
+  item: {
+    minWidth: "75%",
+    backgroundColor: 'rgba(33, 73, 125, 0.7)',
+    borderRadius: 25,
+    paddingVertical: 10,
+    marginVertical: 8,
+  },
+  title: {
+    color: 'white',
+    textAlign: "center",
+    fontSize: 26,
   },
 });
