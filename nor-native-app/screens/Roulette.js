@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Image, Linking, Platform, TouchableOpacity } fr
 
 export default function Roulette({ navigation, route }) {
   const [restaurant, setRestaurant] = useState(route.params.restaurant)
+  // const [rerolls, setrerolls] = useState(route.params.rerolls)
+  const [rerolls, setrerolls] = useState(2)
 
   if(!restaurant) {
     return (
@@ -58,15 +60,36 @@ export default function Roulette({ navigation, route }) {
 
         </Text>
 
-        <View style={{flex: 1.25, top:"10%", width:"70%",}}>
+        {rerolls < 2 ? 
+        <View style={{flex: 1.25, top:"15%", flexDirection: 'row'}}>
           <TouchableOpacity
             onPress={() => openRestaurant(restaurant['location']['display_address'])}
             style={styles.button}>
               <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", fontWeight:"900"}}>
-                TAKE ME THERE!
+                Let's go!
+              </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => console.log("TODO: Populate this function")}
+            style={styles.button2}>
+              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", fontWeight:"900"}}>
+                Reroll?
               </Text>
           </TouchableOpacity>
         </View>
+
+        : 
+        
+        <View style={{flex: 1.25, top:"15%", width:"70%", flexDirection:'row'}}>
+          <TouchableOpacity
+            onPress={() => openRestaurant(restaurant['location']['display_address'])}
+            style={styles.button}>
+              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", fontWeight:"900"}}>
+                Let's go!
+              </Text>
+          </TouchableOpacity>
+        </View>
+        }
       </View>
     </View>
   );
@@ -86,7 +109,18 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   button: {
-    backgroundColor: 'rgba(33, 73, 125, 0.6)',
+    flex:1,
+    marginHorizontal:'5%',
+    height: '40%',
+    backgroundColor: 'rgba(33, 73, 125, 1.0)',
+    padding:10,
+    borderRadius: 50
+  },
+  button2: {
+    flex:1,
+    marginHorizontal:'5%',
+    height: '40%',
+    backgroundColor: 'rgba(125, 33, 125, 1.0)',
     padding:10,
     borderRadius: 50
   },
