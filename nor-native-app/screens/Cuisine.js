@@ -5,11 +5,11 @@ const labels = ["American", "Barbecue", "Chinese", "French", "Hamburger", "India
 const genres = ["newamerican", "bbq", "Chinese", "French", "burgers", "indpak", "Italian", "Japanese", "Mexican", "pizza", "seafood", "steak", "sushi", "thai"]
 
 export default function Cuisine({ navigation }) {
-  const [state, setstate] = useState({ cuisine: "newamerican" });
+  const [state, setstate] = useState({ cuisine: ["newamerican"] });
 
   function Item({ title, selected, onSelect }) {
     return (
-      <TouchableOpacity onPress={() => onSelect(title)} style={[styles.item, { backgroundColor: selected ? 'rgba(33, 73, 125, 1.0)' : 'rgba(33, 73, 125, 0.7)' }]}>
+      <TouchableOpacity onPress={() => onSelect(title)} style={[styles.item, { backgroundColor: selected ? 'rgba(33, 125, 73, 1.0)' : 'rgba(33, 73, 125, 0.7)' }]}>
         <Text style={styles.title}>{title}</Text>
       </TouchableOpacity>
     );
@@ -17,7 +17,14 @@ export default function Cuisine({ navigation }) {
 
   const onSelect = React.useCallback(
     id => {
-      setstate({ ...state, cuisine: genres[labels.indexOf(id)] });
+      var currGenre = genres[labels.indexOf(id)];
+      var allGenres = state.cuisine;
+      if(allGenres.includes(currGenre)) {
+        setstate({ ...state, cuisine: allGenres.filter(item => item != currGenre)});
+      }
+      else {
+        setstate({ ...state, cuisine: [...allGenres, currGenre]});
+      }
     },
     [state],
   );
@@ -39,7 +46,7 @@ export default function Cuisine({ navigation }) {
           <FlatList style={{ flex: 1, marginVertical: "2.5%", width: "100%" }}
             contentContainerStyle={{width:"100%", alignItems:"center"}}
             data={labels}
-            renderItem={({ item }) => <Item title={item} selected={labels[genres.indexOf(state.cuisine)] == item} onSelect={onSelect} />}
+            renderItem={({ item }) => <Item title={item} selected={(state.cuisine).includes(genres[labels.indexOf(item)])} onSelect={onSelect} />}
             keyExtractor={item => item} />
         </View>
         <View style={{ flex: 1, top: "3.75%", width: "80%" }}>
@@ -94,7 +101,7 @@ const styles = StyleSheet.create({
     color: "white",
   },
   button: {
-    backgroundColor: 'rgba(33, 73, 125, 0.6)',
+    backgroundColor: 'rgba(33, 125, 73, 1.0)',
     padding: 10,
     borderRadius: 50
   },
