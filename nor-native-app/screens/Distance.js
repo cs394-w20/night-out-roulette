@@ -41,7 +41,6 @@ export default function Distance({ navigation, route }) {
           <TouchableOpacity
             onPress={() => navigation.navigate("Price", { ...state })}
             style={styles.button}>
-
             <Text style={{ position: "relative", color: "rgba(220,220,220, 1)", textAlign: "center", fontSize: 24, fontWeight: "900" }}>
               Next
               </Text>
@@ -84,7 +83,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   button: {
-    backgroundColor: 'rgba(33, 73, 125, 0.6)',
+    backgroundColor: 'rgba(33, 125, 73, 1.0)',
     padding: 10,
     borderRadius: 50
   },

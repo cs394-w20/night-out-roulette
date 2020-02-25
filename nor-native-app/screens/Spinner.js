@@ -25,7 +25,7 @@ export default function Spinner({ navigation, route }) {
     .then(response => {
       responseData = response.businesses;
 
-      if(responseData.length === 0) {
+      if(!responseData || responseData.length === 0) {
         setRestaurant(false);
       }
 
@@ -39,7 +39,7 @@ export default function Spinner({ navigation, route }) {
   }, []);
 
   if(restaurant !== null) {
-    setTimeout(function() {navigation.navigate("Roulette", {restaurant: restaurant})}, 1500);
+    setTimeout(function() {navigation.navigate("Roulette", {restaurant: restaurant, rerolls: 0})}, 1500);
   }
 
   return (
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
 })
 
 function formQuery(
-  cuisine,
+  cuisines,
   price,
   distance,
   latitude = 42.05784,
@@ -86,12 +86,17 @@ function formQuery(
 ) {
   let queryString = "https://api.yelp.com/v3/businesses/search?";
 
-  queryString += ("term=" + term);
+  categories = '';
+  cuisines.forEach((c) => categories += (c.toLowerCase() + ","));
+  categories = categories.slice(0, -1)
+  console.log(categories);
+
+  queryString += ("term=" + term);                            // TYPE OF BUSINESS TO SEARCH
   queryString += ("&latitude=" + latitude);
   queryString += ("&longitude=" + longitude);
   queryString += ("&radius=" + distance);
   queryString += ("&limit=" + limit);                         // LIMIT OF NUMBER OF RESTAURANTS
-  queryString += ("&categories=" + cuisine.toLowerCase());
+  queryString += ("&categories=" + categories.slice(0, -1));
   queryString += ("&price=" + price.length);
   queryString += ("&open_now=" + open_now); 
 
