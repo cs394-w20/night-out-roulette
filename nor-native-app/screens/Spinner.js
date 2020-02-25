@@ -73,23 +73,27 @@ const styles = StyleSheet.create({
 })
 
 function formQuery(
-  cuisine,
+  cuisines,
   price,
   distance,
   term = "food",
   limit = 5,
   latitude = 42.05784,
   longitude = -87.67614,
-  open_now = true
+  open_now = false
 ) {
   let queryString = "https://api.yelp.com/v3/businesses/search?";
 
-  queryString += ("term=" + term);
+  categories = '';
+  cuisines.forEach((c) => categories += (c.toLowerCase() + ","));
+  console.log(categories);
+
+  queryString += ("term=" + term);                            // TYPE OF BUSINESS TO SEARCH
   queryString += ("&latitude=" + latitude);
   queryString += ("&longitude=" + longitude);
   queryString += ("&radius=" + distance);
   queryString += ("&limit=" + limit);                         // LIMIT OF NUMBER OF RESTAURANTS
-  queryString += ("&categories=" + cuisine.toLowerCase());
+  queryString += ("&categories=" + categories);
   queryString += ("&price=" + price.length);
   queryString += ("&open_now=" + open_now); 
 
