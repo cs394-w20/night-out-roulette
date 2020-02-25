@@ -10,7 +10,9 @@ export default function Spinner({ navigation, route }) {
     var cuisine = route.params.cuisine;
     var price = route.params.price;
     var distance = route.params.distance;
-    let queryString = formQuery(cuisine, price, distance * 1600);
+    var lat = route.params.lat;
+    var lon = route.params.lon;
+    let queryString = formQuery(cuisine, price, distance * 1600, lat, lon);
     let responseData = []
     console.log(queryString)
     fetch(queryString, {
@@ -76,10 +78,10 @@ function formQuery(
   cuisine,
   price,
   distance,
-  term = "food",
-  limit = 5,
   latitude = 42.05784,
   longitude = -87.67614,
+  term = "food",
+  limit = 5,
   open_now = true
 ) {
   let queryString = "https://api.yelp.com/v3/businesses/search?";
