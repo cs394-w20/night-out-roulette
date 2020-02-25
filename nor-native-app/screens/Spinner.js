@@ -23,7 +23,7 @@ export default function Spinner({ navigation, route }) {
     .then(response => {
       responseData = response.businesses;
 
-      if(responseData.length === 0) {
+      if(!responseData || responseData.length === 0) {
         setRestaurant(false);
       }
 
@@ -80,12 +80,13 @@ function formQuery(
   limit = 5,
   latitude = 42.05784,
   longitude = -87.67614,
-  open_now = false
+  open_now = true
 ) {
   let queryString = "https://api.yelp.com/v3/businesses/search?";
 
   categories = '';
   cuisines.forEach((c) => categories += (c.toLowerCase() + ","));
+  categories = categories.slice(0, -1)
   console.log(categories);
 
   queryString += ("term=" + term);                            // TYPE OF BUSINESS TO SEARCH
@@ -93,7 +94,7 @@ function formQuery(
   queryString += ("&longitude=" + longitude);
   queryString += ("&radius=" + distance);
   queryString += ("&limit=" + limit);                         // LIMIT OF NUMBER OF RESTAURANTS
-  queryString += ("&categories=" + categories);
+  queryString += ("&categories=" + categories.slice(0, -1));
   queryString += ("&price=" + price.length);
   queryString += ("&open_now=" + open_now); 
 
