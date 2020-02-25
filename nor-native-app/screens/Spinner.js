@@ -37,7 +37,7 @@ export default function Spinner({ navigation, route }) {
   }, []);
 
   if(restaurant !== null) {
-    setTimeout(function() {navigation.navigate("Roulette", {restaurant: restaurant})}, 1500);
+    setTimeout(function() {navigation.navigate("Roulette", {restaurant: restaurant, rerolls: 0})}, 1500);
   }
 
   return (
