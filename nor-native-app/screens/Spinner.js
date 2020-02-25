@@ -86,7 +86,7 @@ function formQuery(
 ) {
   let queryString = "https://api.yelp.com/v3/businesses/search?";
 
-  categories = '';
+  var categories = '';
   cuisines.forEach((c) => categories += (c.toLowerCase() + ","));
   categories = categories.slice(0, -1)
   console.log(categories);
@@ -96,7 +96,7 @@ function formQuery(
   queryString += ("&longitude=" + longitude);
   queryString += ("&radius=" + distance);
   queryString += ("&limit=" + limit);                         // LIMIT OF NUMBER OF RESTAURANTS
-  queryString += ("&categories=" + categories.slice(0, -1));
+  queryString += ("&categories=" + categories);
   queryString += ("&price=" + price.length);
   queryString += ("&open_now=" + open_now); 
 

@@ -5,7 +5,7 @@ import Roulette from "./Roulette";
 const labels = ["American", "Barbecue", "Chinese", "French", "Hamburger", "Indian", "Italian", "Japanese", "Mexican", "Pizza", "Seafood", "Steak", "Sushi", "Thai"]
 const genres = ["newamerican", "bbq", "Chinese", "French", "burgers", "indpak", "Italian", "Japanese", "Mexican", "pizza", "seafood", "steak", "sushi", "thai"]
 
-export default function Cuisine({ navigation }) {
+export default function Cuisine({ navigation, route }) {
   const [state, setstate] = useState({ ...route.params, cuisine: ["newamerican"] });
 
   function Item({ title, selected, onSelect }) {
