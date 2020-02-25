@@ -3,8 +3,7 @@ import { StyleSheet, Text, View, Image, Linking, Platform, TouchableOpacity } fr
 
 export default function Roulette({ navigation, route }) {
   const [restaurant, setRestaurant] = useState(route.params.restaurant)
-  // const [rerolls, setrerolls] = useState(route.params.rerolls)
-  const [rerolls, setrerolls] = useState(2)
+  const [rerolls, setrerolls] = useState(route.params.rerolls)
 
   if(!restaurant) {
     return (
