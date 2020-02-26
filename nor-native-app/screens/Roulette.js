@@ -1,9 +1,23 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, Image, Linking, Platform, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, Image, Linking, Platform, TouchableOpacity, BackHandler } from "react-native";
 
 export default function Roulette({ navigation, route }) {
   const [restaurant, setRestaurant] = useState(route.params.restaurant)
   const [rerolls, setrerolls] = useState(route.params.rerolls)
+
+  function goHome() {
+    console.log('try')
+    navigation.navigate('Home');
+    return true;
+  }
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', goHome);
+
+    return () => {
+      BackHandler.removeEventListener("hardwareBackPress", goHome);
+    };
+  }, [])
 
   if(!restaurant) {
     return (
