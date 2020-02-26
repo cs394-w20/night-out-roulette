@@ -2,36 +2,68 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 import { REACT_APP_API_KEY } from "react-native-dotenv";
 
+
+
 export default function Spinner({ navigation, route }) {
 
   const [restaurant, setRestaurant] = useState(null);
 
   useEffect(() => {
     var { cuisine, price, distance, time } = route.params;
-    let queryString = formQuery(cuisine, price, distance * 1600, time);
+    var latitude;
+    var longitude;
+
     let responseData = []
-    console.log(queryString)
-    fetch(queryString, {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + REACT_APP_API_KEY
-      }
-    })
-      .then(response => response.json())
-      .then(response => {
-        responseData = response.businesses;
 
-        if (!responseData || responseData.length === 0) {
-          setRestaurant(false);
+    async function getRestaurants(queryString) {
+      fetch(queryString, {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + REACT_APP_API_KEY
         }
+      })
+        .then(response => response.json())
+        .then(response => {
+          responseData = response.businesses;
+  
+          if (responseData.length === 0) {
+            setRestaurant(false);
+          }
+  
+          const randomNum = Math.floor(Math.random() * responseData.length);
+  
+          const chosenRestaurant = responseData[randomNum];
+  
+          console.log(chosenRestaurant);
+          setRestaurant(chosenRestaurant)
+        });
+    }
 
-        const randomNum = Math.floor(Math.random() * responseData.length);
+    async function getLocation() {
+        await navigator.geolocation.getCurrentPosition(
+          position => {
+            latitude = position.coords.latitude;
+            longitude = position.coords.longitude;
+            console.log(latitude)
+            console.log(longitude)
+            getRestaurants(formQuery(cuisine, price, distance * 1600, time, latitude, longitude))
+          },
+          error => {
+            console.log(error.message);
+            Actions.error({ message: 'gps_error' });
+            latitude = 42.056;
+            longitude = -87.675;
+            getRestaurants(formQuery(cuisine, price, distance * 1600, time, latitude, longitude))
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: 50000,
+            maximumAge: 1000
+          }
+        );
+      }
 
-        const chosenRestaurant = responseData[randomNum];
-
-        console.log(chosenRestaurant);
-        setRestaurant(chosenRestaurant)
-      });
+    getLocation();
   }, []);
 
   if (restaurant !== null) {
@@ -70,24 +102,33 @@ const styles = StyleSheet.create({
   },
 })
 
-function formQuery(
-  cuisine,
+function formQuery(//these are ARGUMENTS!
+  cuisines,
   price,
   distance,
   time,
+  latitude,
+  longitude,
   term = "food",
   limit = 5,
-  latitude = 42.05784,
-  longitude = -87.67614,
+  open_now = true
 ) {
+  console.log("lat/long in formQuery");
+  console.log(latitude);
+  console.log(longitude);
   let queryString = "https://api.yelp.com/v3/businesses/search?";
 
-  queryString += ("term=" + term);
+  var categories = '';
+  cuisines.forEach((c) => categories += (c.toLowerCase() + ","));
+  categories = categories.slice(0, -1)
+  console.log(categories);
+
+  queryString += ("term=" + term);                            // TYPE OF BUSINESS TO SEARCH
   queryString += ("&latitude=" + latitude);
   queryString += ("&longitude=" + longitude);
   queryString += ("&radius=" + distance);
   queryString += ("&limit=" + limit);                         // LIMIT OF NUMBER OF RESTAURANTS
-  queryString += ("&categories=" + cuisine.toLowerCase());
+  queryString += ("&categories=" + categories);
   queryString += ("&price=" + price.length);
 
   var currTime = new Date();
