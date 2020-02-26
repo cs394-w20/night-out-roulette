@@ -120,12 +120,17 @@ function formQuery(//these are ARGUMENTS!
   console.log(longitude);
   let queryString = "https://api.yelp.com/v3/businesses/search?";
 
-  queryString += ("term=" + term);
+  var categories = '';
+  cuisines.forEach((c) => categories += (c.toLowerCase() + ","));
+  categories = categories.slice(0, -1)
+  console.log(categories);
+
+  queryString += ("term=" + term);                            // TYPE OF BUSINESS TO SEARCH
   queryString += ("&latitude=" + latitude);
   queryString += ("&longitude=" + longitude);
   queryString += ("&radius=" + distance);
   queryString += ("&limit=" + limit);                         // LIMIT OF NUMBER OF RESTAURANTS
-  queryString += ("&categories=" + cuisine.toLowerCase());
+  queryString += ("&categories=" + categories);
   queryString += ("&price=" + price.length);
   queryString += ("&open_now=" + open_now);
 
