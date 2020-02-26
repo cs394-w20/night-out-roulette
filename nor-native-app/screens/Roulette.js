@@ -16,11 +16,11 @@ export default function Roulette({ navigation, route }) {
           style={{ width: "100%", height: "100%"}}
         />
         <View style={{position:"absolute", paddingTop:"5%", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white", flexDirection:"column", alignItems:"center"}}>
-          <Text style={{position:'relative', flex:1, top:"5%", fontSize:34, color:"white", textAlign:"left", fontWeight:"600"}}>
+        <Text style={{position:'relative', flex:1, top:"5%", fontSize:34, color:"white", textAlign:"left", fontWeight:"600"}}>
             No matches found.
           </Text>
-          <Text style={{flex:3}}/>
-          <View style={{flex: 1.25, top:"10%", width:"70%",}}>
+          <Text style={{flex:2.5}}/>
+          <View style={{flex: 1.25, top:"17%", width:"70%", flexDirection:'row'}}>
             <TouchableOpacity
               onPress={() => navigation.navigate('Cuisine')}
               style={styles.button}>
@@ -49,15 +49,18 @@ export default function Roulette({ navigation, route }) {
         </Text>
 
         {/* Name and Address */}
-        <Text style={{flex:1, fontSize:25, position:"relative", backgroundColor:"rgba(0,0,0, 0.6)", bottom:"3%", paddingVertical:"5%", width:"100%", color:"white", textAlign:"center"}}>
-            <Text style={{textTransform:"uppercase", fontWeight:"bold", fontSize:35}}>{restaurant['name']}</Text>{"\n"}
-          {restaurant['location']['display_address'][0]}{"\n"}
-          {restaurant['location']['display_address'][1]}
-        </Text>
+        <View style={{flex:1.5, flexDirection:'column', position:"relative", backgroundColor:"rgba(0,0,0, 0.6)", bottom:"3%", paddingVertical:"5%", paddingBottom:'2%', width:"100%", alignItems:"center"}}>
+            <Text style={{textTransform:"uppercase", fontWeight:"bold", fontSize:35, color:'white', flex:1.75}}>{restaurant['name']}</Text>
+            <Text style={{textTransform:"uppercase", fontWeight:"bold", fontSize:25, color:'white', flex:1}}>{restaurant['location']['display_address'][0]}</Text>
+            <Text style={{textTransform:"uppercase", fontWeight:"bold", fontSize:25, color:'white', flex:1.5}}>{restaurant['location']['display_address'][1]}</Text>
+            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems:'center', width: "100%", flex:1}}>
+              <Text style={{fontSize:20, color:"white", flex: 1, color:'white', marginLeft:"17%"}}> {(restaurant['distance']/1609.344).toFixed(1)}mi </Text>
+              <Text style={{fontSize:20, color:"white", flex: 1, color:'white'}}> {restaurant['rating']}☆ </Text>
+            </View>
+        </View>
 
-        <Text style={{flex:1.5}}>
-
-        </Text>
+        <View style={{flex:1, flexDirection: 'column', justifyContent: 'center', alignItems:'center', width: "100%"}}>
+        </View>
 
         {rerolls < 2 ? 
         <View style={{flex: 1.25, top:"15%", flexDirection: 'row'}}>
