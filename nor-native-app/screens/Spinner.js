@@ -9,9 +9,7 @@ export default function Spinner({ navigation, route }) {
   const [restaurant, setRestaurant] = useState(null);
 
   useEffect(() => {
-    var cuisine = route.params.cuisine;
-    var price = route.params.price;
-    var distance = route.params.distance;
+    var { cuisine, price, distance, time } = route.params;
     var latitude;
     var longitude;
 
@@ -48,14 +46,14 @@ export default function Spinner({ navigation, route }) {
             longitude = position.coords.longitude;
             console.log(latitude)
             console.log(longitude)
-            getRestaurants(formQuery(cuisine, price, distance * 1600, latitude, longitude))
+            getRestaurants(formQuery(cuisine, price, distance * 1600, time, latitude, longitude))
           },
           error => {
             console.log(error.message);
             Actions.error({ message: 'gps_error' });
             latitude = 42.056;
             longitude = -87.675;
-            getRestaurants(formQuery(cuisine, price, distance * 1600, latitude, longitude))
+            getRestaurants(formQuery(cuisine, price, distance * 1600, time, latitude, longitude))
           },
           {
             enableHighAccuracy: true,
@@ -103,10 +101,12 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
 })
+
 function formQuery(//these are ARGUMENTS!
   cuisines,
   price,
   distance,
+  time,
   latitude,
   longitude,
   term = "food",
@@ -130,7 +130,45 @@ function formQuery(//these are ARGUMENTS!
   queryString += ("&limit=" + limit);                         // LIMIT OF NUMBER OF RESTAURANTS
   queryString += ("&categories=" + categories);
   queryString += ("&price=" + price.length);
-  queryString += ("&open_now=" + open_now);
+
+  var currTime = new Date();
+
+  switch(time) {
+    case 'Breakfast':
+      var possible = currTime.getHours() <= 10
+      if(possible) {
+        currTime.setHours(8)
+      } else {
+        currTime.setDate(currTime.getDate()+1)
+        currTime.setHours(8)
+      }
+      queryString += ("&open_at=" + Math.floor(currTime.getTime()/1000));
+      break
+    case 'Lunch':
+      var possible = currTime.getHours() <= 14
+      if(possible) {
+        currTime.setHours(12)
+        
+      } else {
+        currTime.setDate(currTime.getDate()+1)
+        currTime.setHours(12)
+      }
+      queryString += ("&open_at=" + Math.floor(currTime.getTime()/1000));
+      break
+    case 'Dinner':
+      var possible = currTime.getHours() <= 20
+      if(possible) {
+        currTime.setHours(18)
+      } else {
+        currTime.setDate(currTime.getDate()+1)
+        currTime.setHours(18)
+      }
+      queryString += ("&open_at=" + Math.floor(currTime.getTime()/1000));
+      break
+    default:
+      queryString += ("&open_now=" + true);
+      break
+  }
 
   return queryString;
 }
