@@ -7,7 +7,7 @@ export default function Time({ navigation, route }) {
   
   function Item({ title, selected, onSelect }) {
     return (
-      <TouchableOpacity onPress={() => onSelect(title)} style={[styles.item, {backgroundColor: selected? 'rgba(33, 73, 125, 1.0)' : 'rgba(33, 73, 125, 0.7)'}]}>
+      <TouchableOpacity onPress={() => onSelect(title)} style={[styles.item, {backgroundColor: selected? 'rgba(33, 125, 73, 1.0)' : 'rgba(33, 73, 125, 0.7)'}]}>
         <Text style={styles.title}>{title}</Text>
       </TouchableOpacity>
     );
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     color:"white",
   },
   button: {
-    backgroundColor: 'rgba(33, 73, 125, 0.6)',
+    backgroundColor: 'rgba(33, 125, 73, 1.0)',
     padding:10,
     borderRadius: 50
   },
