@@ -2,15 +2,72 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 import { REACT_APP_API_KEY } from "react-native-dotenv";
 
+async function makeLocationPromise() {
+  return new Promise((resolve,reject)=> {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        console.log("hello world");
+        console.log(position);
+        resolve(position);
+      },
+      error => {
+        console.log("hello world");
+        console.log(error.message);
+        Actions.error({ message: 'gps_error' });
+        reject(error);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 50000,
+        maximumAge: 1000
+      }
+    );
+  });
+
+};
 export default function Spinner({ navigation, route }) {
 
   const [restaurant, setRestaurant] = useState(null);
 
-  useEffect(() => {
+  useEffect(async () => {
     var cuisine = route.params.cuisine;
     var price = route.params.price;
     var distance = route.params.distance;
-    let queryString = formQuery(cuisine, price, distance * 1600);
+    var latitude;
+    var longitude;
+    let result = await makeLocationPromise().then(
+      position=>{
+      console.log("positionLocated");
+      console.log(position);
+      latitude = position.coords.latitude;
+      longitude = position.coords.longitude;
+      });
+/*    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+      },
+      (error) => {
+        Actions.error({ message: 'gps_error' });
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 100000,
+        maximumAge: 1000
+      })*/
+    //spinlock b/c fuck
+    var x = 0;
+    console.log("updatedVersion");
+    /*while(latitude === undefined || longitude === undefined) {
+      setTimeout(function(){
+        console.log("spinning more");
+      }, 2000);//a
+    }*/
+
+    alert(latitude);
+    alert(longitude);
+    console.log("spun");
+    let queryString = formQuery(cuisine, price, distance * 1600, latitude, longitude);
     let responseData = []
     console.log(queryString)
     fetch(queryString, {
@@ -71,17 +128,21 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
 })
-
-function formQuery(
+ //latitude = 42.05784,
+ //longitude = -87.67614,
+function formQuery(//these are ARGUMENTS!
   cuisine,
   price,
-  distance,
+  distance,  
+  latitude,
+  longitude,
   term = "food",
   limit = 5,
-  latitude = 42.05784,
-  longitude = -87.67614,
   open_now = true
 ) {
+  console.log("lat/long in formQuery");
+  console.log(latitude);
+  console.log(longitude);
   let queryString = "https://api.yelp.com/v3/businesses/search?";
 
   queryString += ("term=" + term);
