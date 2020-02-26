@@ -82,7 +82,7 @@ function formQuery(
   longitude = -87.67614,
   term = "food",
   limit = 5,
-  open_now = false
+  open_now = true
 ) {
   let queryString = "https://api.yelp.com/v3/businesses/search?";
 
