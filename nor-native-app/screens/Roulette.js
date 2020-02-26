@@ -16,11 +16,11 @@ export default function Roulette({ navigation, route }) {
           style={{ width: "100%", height: "100%"}}
         />
         <View style={{position:"absolute", paddingTop:"5%", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white", flexDirection:"column", alignItems:"center"}}>
-          <Text style={{position:'relative', flex:1, top:"5%", fontSize:34, color:"white", textAlign:"left", fontWeight:"600"}}>
+        <Text style={{position:'relative', flex:1, top:"5%", fontSize:34, color:"white", textAlign:"left", fontWeight:"600"}}>
             No matches found.
           </Text>
-          <Text style={{flex:3}}/>
-          <View style={{flex: 1.25, top:"10%", width:"70%",}}>
+          <Text style={{flex:2.5}}/>
+          <View style={{flex: 1.25, top:"17%", width:"70%", flexDirection:'row'}}>
             <TouchableOpacity
               onPress={() => navigation.navigate('Cuisine')}
               style={styles.button}>
