@@ -6,7 +6,7 @@ const labels = ["American", "Barbecue", "Chinese", "French", "Hamburger", "India
 const genres = ["newamerican", "bbq", "Chinese", "French", "burgers", "indpak", "Italian", "Japanese", "Mexican", "pizza", "seafood", "steak", "sushi", "thai"]
 
 export default function Cuisine({ navigation, route }) {
-  const [state, setstate] = useState({ ...route.params, cuisine: ["newamerican"] });
+  const [state, setstate] = useState({ cuisine: ["newamerican"] });
 
   function Item({ title, selected, onSelect }) {
     return (

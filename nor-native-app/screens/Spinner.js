@@ -103,10 +103,8 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
 })
-//latitude = 42.05784,
-//longitude = -87.67614,
 function formQuery(//these are ARGUMENTS!
-  cuisine,
+  cuisines,
   price,
   distance,
   latitude,
