@@ -6,7 +6,6 @@ export default function Roulette({ navigation, route }) {
   const [rerolls, setrerolls] = useState(route.params.rerolls)
 
   function goHome() {
-    console.log('try')
     navigation.navigate('Home');
     return true;
   }
@@ -63,17 +62,13 @@ export default function Roulette({ navigation, route }) {
         </Text>
 
         {/* Name and Address */}
-        <View style={{flex:1.5, flexDirection:'column', position:"relative", backgroundColor:"rgba(0,0,0, 0.6)", bottom:"3%", paddingVertical:"5%", paddingBottom:'2%', width:"100%", alignItems:"center"}}>
-            <Text style={{textTransform:"uppercase", fontWeight:"bold", fontSize:35, color:'white', flex:1.75}}>{restaurant['name']}</Text>
-            <Text style={{textTransform:"uppercase", fontWeight:"bold", fontSize:25, color:'white', flex:1}}>{restaurant['location']['display_address'][0]}</Text>
-            <Text style={{textTransform:"uppercase", fontWeight:"bold", fontSize:25, color:'white', flex:1.5}}>{restaurant['location']['display_address'][1]}</Text>
-            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems:'center', width: "100%", flex:1}}>
-              <Text style={{fontSize:20, color:"white", flex: 1, color:'white', marginLeft:"17%"}}> {(restaurant['distance']/1609.344).toFixed(1)}mi </Text>
-              <Text style={{fontSize:20, color:"white", flex: 1, color:'white'}}> {restaurant['rating']}☆ </Text>
-            </View>
-        </View>
+        <Text style={{flex:1, fontSize:25, position:"relative", backgroundColor:"rgba(0,0,0, 0.6)", bottom:"3%", paddingVertical:"5%", width:"100%", color:"white", textAlign:"center"}}>
+            <Text style={{textTransform:"uppercase", fontWeight:"bold", fontSize:35}}>{restaurant['name']}</Text>{"\n"}
+          {restaurant['location']['display_address'][0]}{"\n"}
+          {restaurant['location']['display_address'][1]}
+        </Text>
 
-        <View style={{flex:1, flexDirection: 'column', justifyContent: 'center', alignItems:'center', width: "100%"}}>
+        <View style={{flex:1.5, flexDirection: 'column', justifyContent: 'center', alignItems:'center', width: "100%"}}>
         </View>
 
         {rerolls < 2 ? 

@@ -44,8 +44,6 @@ export default function Spinner({ navigation, route }) {
           position => {
             latitude = position.coords.latitude;
             longitude = position.coords.longitude;
-            console.log(latitude)
-            console.log(longitude)
             getRestaurants(formQuery(cuisine, price, distance * 1600, time, latitude, longitude))
           },
           error => {
@@ -111,17 +109,12 @@ function formQuery(//these are ARGUMENTS!
   longitude,
   term = "food",
   limit = 5,
-  open_now = true
 ) {
-  console.log("lat/long in formQuery");
-  console.log(latitude);
-  console.log(longitude);
   let queryString = "https://api.yelp.com/v3/businesses/search?";
 
   var categories = '';
   cuisines.forEach((c) => categories += (c.toLowerCase() + ","));
   categories = categories.slice(0, -1)
-  console.log(categories);
 
   queryString += ("term=" + term);                            // TYPE OF BUSINESS TO SEARCH
   queryString += ("&latitude=" + latitude);
@@ -169,6 +162,8 @@ function formQuery(//these are ARGUMENTS!
       queryString += ("&open_now=" + true);
       break
   }
+
+  console.log(queryString)
 
   return queryString;
 }
