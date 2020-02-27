@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
-export default function Price({ navigation, route }) {
-  const [state, setstate] = useState({ ...route.params, price: "$", rerolls: 0 });
+export default function Time({ navigation, route }) {
+  const [state, setstate] = useState({ ...route.params, time: "Now" });
   
   function Item({ title, selected, onSelect }) {
     return (
@@ -15,7 +15,8 @@ export default function Price({ navigation, route }) {
   
   const onSelect = React.useCallback(
     id => {
-      setstate({...state, price: id});
+      setstate({...state, time: id});
+      console.log(state)
     },
     [state],
   );
@@ -31,18 +32,18 @@ export default function Price({ navigation, route }) {
       />
       <View style={{position:"absolute", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.6)", color:"white", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
         <View style={styles.instructions}>
-          <Text style={styles.text}>How spendy are you feeling?</Text>
+          <Text style={styles.text}>When do you want to eat?</Text>
         </View>
         <View style={styles.pickerContainer}>
           <FlatList style={{ flex: 1, marginVertical: "2.5%", width: "100%" }}
                     contentContainerStyle={{width:"100%", alignItems:"center"}} 
-                    data={['$', '$$', '$$$', '$$$$']}
-                    renderItem={({ item }) => <Item title={item} selected={state.price == item} onSelect={onSelect} />}
+                    data={['Now', 'Breakfast', 'Lunch', 'Dinner']}
+                    renderItem={({ item }) => <Item title={item} selected={state.time == item} onSelect={onSelect} />}
                     keyExtractor={item => item}/>
         </View>
         <View style={{flex:1, top:"3.75%", width:"80%"}}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("Time", {...state})}
+            onPress={() => navigation.navigate("Spinner", {...state})}
             style={styles.button}>
               
               <Text style={{position:"relative", color:"rgba(220,220,220, 1)", textAlign:"center", fontSize:24, fontWeight:"900"}}>

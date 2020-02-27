@@ -1,11 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from "react-native";
 
 export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
-      
-      
       <Image
         source={{
           uri:
