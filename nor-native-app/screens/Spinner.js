@@ -7,12 +7,13 @@ import { REACT_APP_API_KEY } from "react-native-dotenv";
 export default function Spinner({ navigation, route }) {
 
   const [restaurant, setRestaurant] = useState(null);
+  const [restaurantTwo, setRestaurantTwo] = useState(null);
+  const [restaurantThree, setRestaurantThree] = useState(null);
 
   useEffect(() => {
     var { cuisine, price, distance, time } = route.params;
     var latitude;
     var longitude;
-
     let responseData = []
 
     async function getRestaurants(queryString) {
@@ -26,16 +27,28 @@ export default function Spinner({ navigation, route }) {
         .then(response => {
           responseData = response.businesses;
   
-          if (responseData.length === 0) {
+          if(!responseData || responseData.length === 0) {
             setRestaurant(false);
           }
-  
+
           const randomNum = Math.floor(Math.random() * responseData.length);
-  
-          const chosenRestaurant = responseData[randomNum];
-  
-          console.log(chosenRestaurant);
-          setRestaurant(chosenRestaurant)
+
+          let randomNum2 = randomNum
+
+          while (randomNum2 == randomNum){
+            randomNum2 = Math.floor(Math.random() * responseData.length);
+          }
+
+          let randomNum3 = randomNum
+
+          while (randomNum3 == randomNum || randomNum3 == randomNum2){
+            randomNum3 = Math.floor(Math.random() * responseData.length);
+          }
+
+          console.log(responseData[randomNum]);
+          setRestaurantTwo(responseData[randomNum2]);
+          setRestaurantThree(responseData[randomNum3]);
+          setRestaurant(responseData[randomNum]);
         });
     }
 
@@ -64,9 +77,14 @@ export default function Spinner({ navigation, route }) {
     getLocation();
   }, []);
 
-  if (restaurant !== null) {
-    setTimeout(function () { navigation.navigate("Roulette", { restaurant: restaurant }) }, 1500);
-  }
+  if(restaurant !== null) {
+    if (route.params.rerolls === 0){
+      setTimeout(function() {navigation.navigate("Roulette", {restaurant: restaurant, restaurantTwo: restaurantTwo, restaurantThree: restaurantThree, rerolls: 0})}, 1500);
+    } else if (route.params.rerolls === 1){
+      setTimeout(function() {navigation.navigate("Roulette", {restaurant: route.params.restaurantTwo, restaurantTwo: route.params.restaurantTwo, restaurantThree: route.params.restaurantThree, rerolls: 1})}, 1500);
+    } else if (route.params.rerolls === 2){
+      setTimeout(function() {navigation.navigate("Roulette", {restaurant: route.params.restaurantThree, restaurantTwo: route.params.restaurantTwo, restaurantThree: route.params.restaurantThree, rerolls: 2})}, 1500);
+    }
 
   return (
     <View style={styles.container}>
@@ -100,7 +118,7 @@ const styles = StyleSheet.create({
   },
 })
 
-function formQuery(//these are ARGUMENTS!
+function formQuery(
   cuisines,
   price,
   distance,
