@@ -83,24 +83,6 @@ export default function Roulette({ navigation, route }) {
               </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => console.log("TODO: Populate this function")}
-            style={styles.button2}>
-              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", fontWeight:"900"}}>
-                Reroll?
-              </Text>
-          </TouchableOpacity>
-        </View>
-
-        {rerolls < 2 ? 
-        <View style={{flex: 1.25, top:"15%", flexDirection: 'row'}}>
-          <TouchableOpacity
-            onPress={() => openRestaurant(restaurant['location']['display_address'])}
-            style={styles.button}>
-              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", fontWeight:"900"}}>
-                Let's go!
-              </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
             onPress={() => navigation.navigate("Spinner", {rerolls: rerolls + 1, restaurantTwo: restaurantTwo, restaurantThree: restaurantThree})}
             style={styles.button2}>
               <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", fontWeight:"900"}}>

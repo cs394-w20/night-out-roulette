@@ -85,6 +85,7 @@ export default function Spinner({ navigation, route }) {
     } else if (route.params.rerolls === 2){
       setTimeout(function() {navigation.navigate("Roulette", {restaurant: route.params.restaurantThree, restaurantTwo: route.params.restaurantTwo, restaurantThree: route.params.restaurantThree, rerolls: 2})}, 1500);
     }
+  }
 
   return (
     <View style={styles.container}>
