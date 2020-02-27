@@ -5,6 +5,8 @@ import { REACT_APP_API_KEY } from "react-native-dotenv";
 export default function Spinner({ navigation, route }) {
 
   const [restaurant, setRestaurant] = useState(null);
+  const [restaurantTwo, setRestaurantTwo] = useState(null);
+  const [restaurantThree, setRestaurantThree] = useState(null);
 
   useEffect(() => {
     var cuisine = route.params.cuisine;
@@ -28,16 +30,35 @@ export default function Spinner({ navigation, route }) {
       }
 
       const randomNum = Math.floor(Math.random() * responseData.length);
+      
+      let randomNum2 = randomNum
 
-      const chosenRestaurant = responseData[randomNum];
+      while (randomNum2 == randomNum){
+        randomNum2 = Math.floor(Math.random() * responseData.length);
+      }
 
-      console.log(chosenRestaurant);
-      setRestaurant(chosenRestaurant)
+      let randomNum3 = randomNum
+
+      while (randomNum3 == randomNum || randomNum3 == randomNum2){
+        randomNum3 = Math.floor(Math.random() * responseData.length);
+      }
+
+      console.log(responseData[randomNum]);
+      setRestaurantTwo(responseData[randomNum2]);
+      setRestaurantThree(responseData[randomNum3]);
+      setRestaurant(responseData[randomNum]);
     });
   }, []);
 
   if(restaurant !== null) {
-    setTimeout(function() {navigation.navigate("Roulette", {restaurant: restaurant, rerolls: 0})}, 1500);
+    if (route.params.rerolls === 0){
+      setTimeout(function() {navigation.navigate("Roulette", {restaurant: restaurant, restaurantTwo: restaurantTwo, restaurantThree: restaurantThree, rerolls: 0})}, 1500);
+    } else if (route.params.rerolls === 1){
+      setTimeout(function() {navigation.navigate("Roulette", {restaurant: route.params.restaurantTwo, restaurantTwo: route.params.restaurantTwo, restaurantThree: route.params.restaurantThree, rerolls: 1})}, 1500);
+    } else if (route.params.rerolls === 2){
+      setTimeout(function() {navigation.navigate("Roulette", {restaurant: route.params.restaurantThree, restaurantTwo: route.params.restaurantTwo, restaurantThree: route.params.restaurantThree, rerolls: 2})}, 1500);
+    }
+
   }
 
   return (

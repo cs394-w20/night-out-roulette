@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Image, Linking, Platform, TouchableOpacity } fr
 
 export default function Roulette({ navigation, route }) {
   const [restaurant, setRestaurant] = useState(route.params.restaurant)
+  const [restaurantTwo, setRestaurantTwo] = useState(route.params.restaurantTwo)
+  const [restaurantThree, setRestaurantThree] = useState(route.params.restaurantThree)
   const [rerolls, setrerolls] = useState(route.params.rerolls)
 
   if(!restaurant) {
@@ -69,7 +71,7 @@ export default function Roulette({ navigation, route }) {
               </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => console.log("TODO: Populate this function")}
+            onPress={() => navigation.navigate("Spinner", {rerolls: rerolls + 1, restaurantTwo: restaurantTwo, restaurantThree: restaurantThree})}
             style={styles.button2}>
               <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", fontWeight:"900"}}>
                 Reroll?
