@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
 
 function formQuery(
   cuisines,
-  price,
+  prices,
   distance,
   time,
   latitude,
@@ -134,6 +134,9 @@ function formQuery(
   var categories = '';
   cuisines.forEach((c) => categories += (c.toLowerCase() + ","));
   categories = categories.slice(0, -1)
+  var moneys = '';
+  prices.forEach((c) => moneys += (c.length + ","));
+  moneys = moneys.slice(0, -1)
 
   queryString += ("term=" + term);                            // TYPE OF BUSINESS TO SEARCH
   queryString += ("&latitude=" + latitude);
@@ -141,7 +144,8 @@ function formQuery(
   queryString += ("&radius=" + distance);
   queryString += ("&limit=" + limit);                         // LIMIT OF NUMBER OF RESTAURANTS
   queryString += ("&categories=" + categories);
-  queryString += ("&price=" + price.length);
+  queryString += ("&price=" + moneys);
+
 
   var currTime = new Date();
 

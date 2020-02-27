@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
 export default function Price({ navigation, route }) {
-  const [state, setstate] = useState({ ...route.params, price: "$", rerolls: 0 });
+  const [state, setstate] = useState({ ...route.params, price: ["$"], rerolls: 0 });
   
   function Item({ title, selected, onSelect }) {
     return (
@@ -15,7 +15,15 @@ export default function Price({ navigation, route }) {
   
   const onSelect = React.useCallback(
     id => {
-      setstate({...state, price: id});
+      console.log(state);
+      var currPrice = id;
+      var allPrices = state.price;
+      if(allPrices.includes(currPrice)) {
+        setstate({ ...state, price: allPrices.filter(item => item != currPrice)});
+      }
+      else {
+        setstate({ ...state, price: [...allPrices, currPrice]});
+      }
     },
     [state],
   );
@@ -37,7 +45,7 @@ export default function Price({ navigation, route }) {
           <FlatList style={{ flex: 1, marginVertical: "2.5%", width: "100%" }}
                     contentContainerStyle={{width:"100%", alignItems:"center"}} 
                     data={['$', '$$', '$$$', '$$$$']}
-                    renderItem={({ item }) => <Item title={item} selected={state.price == item} onSelect={onSelect} />}
+                    renderItem={({ item }) => <Item title={item} selected={(state.price).includes(item)} onSelect={onSelect} />}
                     keyExtractor={item => item}/>
         </View>
         <View style={{flex:1, top:"3.75%", width:"80%"}}>

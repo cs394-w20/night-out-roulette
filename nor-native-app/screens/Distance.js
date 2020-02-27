@@ -26,7 +26,7 @@ export default function Distance({ navigation, route }) {
           <Slider
             minimumValue={1}
             maximumValue={25}
-            step={.25}
+            step={.5}
             minimumTrackTintColor="#ffffff"
             maximumTrackTintColor="#aaaaaa"
             value={5}
