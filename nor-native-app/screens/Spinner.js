@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 import { REACT_APP_API_KEY } from "react-native-dotenv";
-
+import spinnyGIF from '../assets/new1.gif'
+import { Vibration } from 'react-native'
+import { Audio } from 'expo-av';
 
 
 export default function Spinner({ navigation, route }) {
@@ -9,12 +11,28 @@ export default function Spinner({ navigation, route }) {
   const [restaurant, setRestaurant] = useState(null);
   const [restaurantTwo, setRestaurantTwo] = useState(null);
   const [restaurantThree, setRestaurantThree] = useState(null);
+  const PATTERN = [100];
+  
 
   useEffect(() => {
     var { cuisine, price, distance, time } = route.params;
     var latitude;
     var longitude;
     let responseData = []
+
+    async function componentWillMount() {
+      this.backgroundMusic = new Audio.Sound();
+      try {
+        await this.backgroundMusic.loadAsync(
+          require("../assets/test2.mp3")
+        );
+        await this.backgroundMusic.setIsLoopingAsync(true);
+        await this.backgroundMusic.playAsync();
+        // Your sound is playing!
+      } catch (error) {
+        // An error occurred!
+      }
+    }
 
     async function getRestaurants(queryString) {
       fetch(queryString, {
@@ -75,14 +93,25 @@ export default function Spinner({ navigation, route }) {
       }
 
     getLocation();
+    componentWillMount();
   }, []);
 
   if(restaurant !== null) {
+    Vibration.vibrate(PATTERN);
     if (route.params.rerolls === 0){
+      if(this.backgroundMusic !== undefined) {
+        this.backgroundMusic.stopAsync();
+      };
       setTimeout(function() {navigation.navigate("Roulette", {restaurant: restaurant, restaurantTwo: restaurantTwo, restaurantThree: restaurantThree, rerolls: 0})}, 1500);
     } else if (route.params.rerolls === 1){
+      if(this.backgroundMusic !== undefined) {
+        this.backgroundMusic.stopAsync();
+      };
       setTimeout(function() {navigation.navigate("Roulette", {restaurant: route.params.restaurantTwo, restaurantTwo: route.params.restaurantTwo, restaurantThree: route.params.restaurantThree, rerolls: 1})}, 1500);
     } else if (route.params.rerolls === 2){
+      if(this.backgroundMusic !== undefined) {
+        this.backgroundMusic.stopAsync();
+      };
       setTimeout(function() {navigation.navigate("Roulette", {restaurant: route.params.restaurantThree, restaurantTwo: route.params.restaurantTwo, restaurantThree: route.params.restaurantThree, rerolls: 2})}, 1500);
     }
   }
@@ -102,7 +131,8 @@ export default function Spinner({ navigation, route }) {
           We're placing your bet!
         </Text>
         <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-          <Image source={require('../assets/new1.gif')}
+          <Image source={spinnyGIF}
+
             style={{ position: "relative", height: "50%", aspectRatio: 1 }} />
         </View>
       </View>

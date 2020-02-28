@@ -78,14 +78,14 @@ export default function Roulette({ navigation, route }) {
           <TouchableOpacity
             onPress={() => openRestaurant(restaurant['location']['display_address'])}
             style={styles.button}>
-              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", fontWeight:"900"}}>
+              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", paddingTop:"12%", fontWeight:"900"}}>
                 Let's go!
               </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate("Spinner", {rerolls: rerolls + 1, restaurantTwo: restaurantTwo, restaurantThree: restaurantThree})}
             style={styles.button2}>
-              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", fontWeight:"900"}}>
+              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", paddingTop:"12%", fontWeight:"900"}}>
                 Reroll?
               </Text>
           </TouchableOpacity>
@@ -97,7 +97,7 @@ export default function Roulette({ navigation, route }) {
           <TouchableOpacity
             onPress={() => openRestaurant(restaurant['location']['display_address'])}
             style={styles.button}>
-              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", fontWeight:"900"}}>
+              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", paddingTop:"8%", fontWeight:"900"}}>
                 Let's go!
               </Text>
           </TouchableOpacity>
