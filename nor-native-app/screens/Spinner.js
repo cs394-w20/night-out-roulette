@@ -102,7 +102,7 @@ export default function Spinner({ navigation, route }) {
       if(this.backgroundMusic !== undefined) {
         this.backgroundMusic.stopAsync();
       };
-      setTimeout(function() {navigation.navigate("Roulette", {restaurant: restaurant, restaurantTwo: restaurantTwo, restaurantThree: restaurantThree, rerolls: 0})}, 1500);
+      navigation.navigate("Roulette", {restaurant: restaurant, restaurantTwo: restaurantTwo, restaurantThree: restaurantThree, rerolls: 0})
     } else if (route.params.rerolls === 1){
       if(this.backgroundMusic !== undefined) {
         this.backgroundMusic.stopAsync();
