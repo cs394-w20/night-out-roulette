@@ -83,10 +83,24 @@ export default function Roulette({ navigation, route }) {
 
         <View style={{flex:1.5, flexDirection: 'column', justifyContent: 'center', alignItems:'center', width: "100%"}}>
           <TouchableOpacity
-            onPress={() => onShare([restaurant, restaurantTwo, restaurantThree][rerolls])}
+            onPress={() => onShare(restaurant)}
             style={styles.button}>
               <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", paddingTop:"12%", fontWeight:"900"}}>
                 Share!
+              </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => Linking.openURL('uber://?action=setPickup&client_id=123583&pickup=my_location&dropoff[formatted_address]='+restaurant['location']['display_address'][0].replace(' ', '%20')+'%2C%20'+restaurant['location']['display_address'][1].substring(0, -6).replace(',', '%2C').replace(' ', '%20')+'%2C%20USA')}
+            style={styles.button}>
+              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", paddingTop:"12%", fontWeight:"900"}}>
+                Uber!
+              </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => Linking.openURL('lyft://ridetype?id=lyft&destination[latitude]='+restaurant['coordinates']['latitude'].toString()+'&destination[longitude]='+restaurant['coordinates']['longitude'].toString())}
+            style={styles.button}>
+              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", paddingTop:"12%", fontWeight:"900"}}>
+                Lyft!
               </Text>
           </TouchableOpacity>
         </View>
