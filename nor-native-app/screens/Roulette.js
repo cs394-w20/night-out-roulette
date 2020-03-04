@@ -79,7 +79,7 @@ export default function Roulette({ navigation, route }) {
             <Text style={{textTransform:"uppercase", fontWeight:"bold", fontSize:35}}>{restaurant['name']}</Text>{"\n"}
           {restaurant['location']['display_address'][0]}{"\n"}
           {restaurant['location']['display_address'][1]}{"\n"}
-          {restaurant['distance']/1609.344}{"\n"}
+          {(restaurant['distance']/1609.344).toFixed(1)}{"\n"}
           {restaurant['rating']}
         </Text>
 
