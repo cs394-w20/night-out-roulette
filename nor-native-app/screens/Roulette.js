@@ -78,7 +78,9 @@ export default function Roulette({ navigation, route }) {
         <Text style={{flex:1, fontSize:25, position:"relative", backgroundColor:"rgba(0,0,0, 0.6)", bottom:"3%", paddingVertical:"5%", width:"100%", color:"white", textAlign:"center"}}>
             <Text style={{textTransform:"uppercase", fontWeight:"bold", fontSize:35}}>{restaurant['name']}</Text>{"\n"}
           {restaurant['location']['display_address'][0]}{"\n"}
-          {restaurant['location']['display_address'][1]}
+          {restaurant['location']['display_address'][1]}{"\n"}
+          {restaurant['distance']/1609.344}{"\n"}
+          {restaurant['rating']}
         </Text>
 
         <View style={{flex:1.5, flexDirection: 'column', justifyContent: 'center', alignItems:'center', width: "100%"}}>
