@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Image, Linking, Platform, TouchableOpacity, BackHandler } from "react-native";
+import { StyleSheet, Text, View, Image, Linking, Platform, TouchableOpacity, BackHandler, Share } from "react-native";
+
+async function onShare(restaurant) {
+  try {
+    const result = await Share.share({
+      message:
+        restaurant['url'],
+    });
+  } catch (error) {
+    alert(error.message);
+  }
+}
 
 export default function Roulette({ navigation, route }) {
   const [restaurant, setRestaurant] = useState(route.params.restaurant)
@@ -71,6 +82,13 @@ export default function Roulette({ navigation, route }) {
         </Text>
 
         <View style={{flex:1.5, flexDirection: 'column', justifyContent: 'center', alignItems:'center', width: "100%"}}>
+          <TouchableOpacity
+            onPress={() => onShare([restaurant, restaurantTwo, restaurantThree][rerolls])}
+            style={styles.button}>
+              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", paddingTop:"12%", fontWeight:"900"}}>
+                Share!
+              </Text>
+          </TouchableOpacity>
         </View>
 
         {rerolls < 2 ? 
@@ -107,12 +125,6 @@ export default function Roulette({ navigation, route }) {
     </View>
   );
 }
-
-{/* <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", top:"35%", width:"100%", textAlign:"center", fontWeight:"500"}}
-          onPress={() => {openRestaurant(restaurant['location']['display_address'])}}
-        >
-          TAKE ME THERE!
-        </Text> */}
 
 const styles = StyleSheet.create({
   container: {

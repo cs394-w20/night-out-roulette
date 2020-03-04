@@ -7,7 +7,7 @@ const genres = ["newamerican", "bbq", "Chinese", "French", "burgers", "indpak", 
 
 
 export default function Cuisine({ navigation }) {
-  const [state, setstate] = useState({ cuisine: ["newamerican"] });
+  const [state, setstate] = useState({ cuisine: [] });
 
   function Item({ title, selected, onSelect }) {
     return (
