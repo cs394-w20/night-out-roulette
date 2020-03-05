@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image, Linking, Platform, TouchableOpacity, BackHandler, Share } from "react-native";
+import { Rating } from 'react-native-ratings';
+import shareicon from '../assets/shareicon.png';
+import spinnyGIF from '../assets/new1.gif'
+
 
 async function onShare(restaurant) {
   try {
@@ -74,51 +78,70 @@ export default function Roulette({ navigation, route }) {
           We Picked a Winner!
         </Text>
 
+        <TouchableOpacity
+          onPress={() => onShare(restaurant)}
+          style={{left:"40%", top:"-14%"}}>
+          <Image source={shareicon}/>
+        </TouchableOpacity>
+
         {/* Name and Address */}
-        <Text style={{flex:1, fontSize:25, position:"relative", backgroundColor:"rgba(0,0,0, 0.6)", bottom:"3%", paddingVertical:"5%", width:"100%", color:"white", textAlign:"center"}}>
+        <Text style={{flex:1, fontSize:25, position:"relative", backgroundColor:"rgba(0,0,0, 0.6)", bottom:"3%", width:"100%", color:"white", textAlign:"center"}}>
             <Text style={{textTransform:"uppercase", fontWeight:"bold", fontSize:35}}>{restaurant['name']}</Text>{"\n"}
           {restaurant['location']['display_address'][0]}{"\n"}
           {restaurant['location']['display_address'][1]}{"\n"}
-          {(restaurant['distance']/1609.344).toFixed(1)}{"\n"}
-          {restaurant['rating']}
+
+
+          {/* <View style={{flex:1.5, flexDirection: 'row', justifyContent: 'space-around', alignItems:'center', width: "100%"}}> */}
+            <Text style={{fontSize:22, lineHeight:"40%"}}>{(restaurant['distance']/1609.344).toFixed(1)} miles away </Text>
+            <Rating
+              imageSize={20}
+              readonly
+              startingValue={restaurant['rating']}
+              style={{left:"40%"}}
+              ratingBackgroundColor='#c8c7c7'
+            />
+            {/* </View> */}
+          {/* <Text style={{fontSize:22}}> STAR {restaurant['rating']}</Text> */}
+          
         </Text>
 
-        <View style={{flex:1.5, flexDirection: 'column', justifyContent: 'center', alignItems:'center', width: "100%"}}>
+        <View style={{flex:1.5, flexDirection: 'row', justifyContent: 'space-around', alignItems:'center', width: "100%"}}>
           <TouchableOpacity
-            onPress={() => onShare(restaurant)}
-            style={styles.button}>
-              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", paddingTop:"12%", fontWeight:"900"}}>
-                Share!
+            onPress={() => openRestaurant(restaurant['location']['display_address'])}
+            style={{backgroundColor:"#01ABE7", paddingTop:"3%", paddingBottom:"3%", paddingLeft:"5%", paddingRight:"5%", borderRadius:"50%"}}>
+              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", padding:"2%", fontWeight:"900"}}>
+              Drive
               </Text>
           </TouchableOpacity>
+
           <TouchableOpacity
             onPress={() => Linking.openURL('uber://?action=setPickup&client_id=123583&pickup=my_location&dropoff[formatted_address]='+restaurant['location']['display_address'][0].replace(' ', '%20')+'%2C%20'+restaurant['location']['display_address'][1].substring(0, -6).replace(',', '%2C').replace(' ', '%20')+'%2C%20USA')}
-            style={styles.button}>
-              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", paddingTop:"12%", fontWeight:"900"}}>
-                Uber!
+            // style={styles.button}
+            style={{backgroundColor:"black", paddingTop:"3%", paddingBottom:"3%", paddingLeft:"5%", paddingRight:"5%", borderRadius:"50%"}}>
+              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", padding:"2%", fontWeight:"900"}}>
+                Uber
               </Text>
           </TouchableOpacity>
+
           <TouchableOpacity
             onPress={() => Linking.openURL('lyft://ridetype?id=lyft&destination[latitude]='+restaurant['coordinates']['latitude'].toString()+'&destination[longitude]='+restaurant['coordinates']['longitude'].toString())}
-            style={styles.button}>
-              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", paddingTop:"12%", fontWeight:"900"}}>
-                Lyft!
+            // style={styles.button}
+            style={{backgroundColor:"#FF00BF", paddingTop:"3%", paddingBottom:"3%", paddingLeft:"5%", paddingRight:"5%", borderRadius:"50%"}}>
+              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", padding:"2%", fontWeight:"900"}}>
+                Lyft
               </Text>
           </TouchableOpacity>
         </View>
 
+
+
         {rerolls < 2 ? 
         <View style={{flex: 1.25, top:"15%", flexDirection: 'row'}}>
-          <TouchableOpacity
-            onPress={() => openRestaurant(restaurant['location']['display_address'])}
-            style={styles.button}>
-              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", paddingTop:"12%", fontWeight:"900"}}>
-                Let's go!
-              </Text>
-          </TouchableOpacity>
+          
           <TouchableOpacity
             onPress={() => navigation.navigate("Spinner", {rerolls: rerolls + 1, restaurantTwo: restaurantTwo, restaurantThree: restaurantThree})}
             style={styles.button2}>
+              <Image style={{width:"18%", height:"45%", left:"10%", bottom:"-69%"}} source={spinnyGIF}/>
               <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", paddingTop:"12%", fontWeight:"900"}}>
                 Reroll?
               </Text>
@@ -128,13 +151,13 @@ export default function Roulette({ navigation, route }) {
         : 
         
         <View style={{flex: 1.25, top:"15%", width:"70%", flexDirection:'row'}}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => openRestaurant(restaurant['location']['display_address'])}
             style={styles.button}>
               <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", paddingTop:"8%", fontWeight:"900"}}>
                 Let's go!
               </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         }
       </View>
@@ -159,10 +182,11 @@ const styles = StyleSheet.create({
   },
   button2: {
     flex:1,
-    marginHorizontal:'5%',
+    marginHorizontal:'20%',
     height: '40%',
-    backgroundColor: 'rgba(125, 33, 125, 1.0)',
-    padding:10,
+    marginLeft: '30%',
+    // backgroundColor: 'rgba(125, 33, 125, 1.0)',
+    // padding:10,
     borderRadius: 50
   },
 });

@@ -27,23 +27,24 @@ export default function Home({ navigation }) {
         Night Out Roulette!
       </Text>
       
-      <View style={{top:"35%", width:"80%"}}>
+      <View style={{top:"38%", width:"80%"}}>
         <TouchableOpacity
           onPress={() => navigation.navigate('Spinner', SurpriseMe())}
-          style={styles.button}>
-            
-            <Text style={{position:"relative", color:"rgba(220,220,220, 1)", textAlign:"center", fontSize:24, fontWeight:"900"}}>
+          // style={styles.button}
+          style={{backgroundColor:"#FFC400", padding:"3%", borderRadius:"50%"}}
+          >
+            <Text style={{position:"relative", color:"#FE0008", textAlign:"center", fontSize:24, fontWeight:"900"}}>
               Surprise me!
             </Text>
         </TouchableOpacity>
       </View>
 
-      <View style={{top:"35%", width:"80%"}}>
+      <View style={{top:"25%", width:"80%"}}>
         <TouchableOpacity
           onPress={() => navigation.navigate("Cuisine")}
-          style={styles.button}>
+          style={{backgroundColor:"#01ABE7", padding:"3%", borderRadius:"50%"}}>
             
-            <Text style={{position:"relative", color:"rgba(220,220,220, 1)", textAlign:"center", fontSize:24, fontWeight:"900"}}>
+            <Text style={{position:"relative", color:"white", textAlign:"center", fontSize:24, fontWeight:"900"}}>
               Let's go for a spin!
             </Text>
         </TouchableOpacity>
