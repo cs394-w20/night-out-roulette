@@ -98,7 +98,7 @@ export default function Roulette({ navigation, route }) {
               readonly
               startingValue={restaurant['rating']}
               style={{left:"40%"}}
-              ratingBackgroundColor='#c8c7c7'
+              // ratingBackgroundColor='#c8c7c7'
             />
             {/* </View> */}
           {/* <Text style={{fontSize:22}}> STAR {restaurant['rating']}</Text> */}
