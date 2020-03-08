@@ -85,7 +85,7 @@ export default function Spinner({ navigation, route }) {
             getRestaurants(formQuery(cuisine, price, distance * 1600, time, latitude, longitude))
           },
           {
-            enableHighAccuracy: true,
+            enableHighAccuracy: false,
             timeout: 50000,
             maximumAge: 1000
           }

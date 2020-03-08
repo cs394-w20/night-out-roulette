@@ -4,6 +4,8 @@ import { Rating } from 'react-native-ratings';
 import shareicon from '../assets/shareicon.png';
 import spinnyGIF from '../assets/new1.gif'
 
+import AppLink from 'react-native-app-link';
+
 
 async function onShare(restaurant) {
   try {
@@ -92,14 +94,14 @@ export default function Roulette({ navigation, route }) {
 
 
           {/* <View style={{flex:1.5, flexDirection: 'row', justifyContent: 'space-around', alignItems:'center', width: "100%"}}> */}
-            <Text style={{fontSize:22, lineHeight:"40%"}}>{(restaurant['distance']/1609.344).toFixed(1)} miles away </Text>
-            <Rating
+            <Text style={{fontSize:22, lineHeight:40}}>{(restaurant['distance']/1609.344).toFixed(1)} miles away </Text>
+            {/* <Rating
               imageSize={20}
               readonly
               startingValue={restaurant['rating']}
               style={{left:"40%"}}
-              // ratingBackgroundColor='#c8c7c7'
-            />
+              ratingBackgroundColor='#c8c7c7'
+            /> */}
             {/* </View> */}
           {/* <Text style={{fontSize:22}}> STAR {restaurant['rating']}</Text> */}
           
@@ -108,25 +110,28 @@ export default function Roulette({ navigation, route }) {
         <View style={{flex:1.5, flexDirection: 'row', justifyContent: 'space-around', alignItems:'center', width: "100%"}}>
           <TouchableOpacity
             onPress={() => openRestaurant(restaurant['location']['display_address'])}
-            style={{backgroundColor:"#01ABE7", paddingTop:"3%", paddingBottom:"3%", paddingLeft:"5%", paddingRight:"5%", borderRadius:"50%"}}>
+            style={{backgroundColor:"#01ABE7", paddingTop:"3%", paddingBottom:"3%", paddingLeft:"5%", paddingRight:"5%", borderRadius:50}}>
               <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", padding:"2%", fontWeight:"900"}}>
               Drive
               </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => Linking.openURL('uber://?action=setPickup&client_id=123583&pickup=my_location&dropoff[formatted_address]='+restaurant['location']['display_address'][0].replace(' ', '%20')+'%2C%20'+restaurant['location']['display_address'][1].substring(0, -6).replace(',', '%2C').replace(' ', '%20')+'%2C%20USA')}
+            onPress={() => AppLink.maybeOpenURL('uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]='+(restaurant['location']['display_address'][0]).replace(/ /g, '%20'),
+                                                { appName:"Uber", appStoreId:"368677368", appStoreLocale:"us", playStoreId:"com.ubercab" })}
             // style={styles.button}
-            style={{backgroundColor:"black", paddingTop:"3%", paddingBottom:"3%", paddingLeft:"5%", paddingRight:"5%", borderRadius:"50%"}}>
+            style={{backgroundColor:"black", paddingTop:"3%", paddingBottom:"3%", paddingLeft:"5%", paddingRight:"5%", borderRadius:50}}>
               <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", padding:"2%", fontWeight:"900"}}>
                 Uber
               </Text>
           </TouchableOpacity>
 
+
           <TouchableOpacity
-            onPress={() => Linking.openURL('lyft://ridetype?id=lyft&destination[latitude]='+restaurant['coordinates']['latitude'].toString()+'&destination[longitude]='+restaurant['coordinates']['longitude'].toString())}
+            onPress={() => AppLink.maybeOpenURL('lyft://ridetype?id=lyft&destination[latitude]='+restaurant['coordinates']['latitude'].toString()+'&destination[longitude]='+restaurant['coordinates']['longitude'].toString(),
+                                                { appName:"Lyft", appStoreId:"529379082", appStoreLocale:"us", playStoreId:"me.lyft.android" })}
             // style={styles.button}
-            style={{backgroundColor:"#FF00BF", paddingTop:"3%", paddingBottom:"3%", paddingLeft:"5%", paddingRight:"5%", borderRadius:"50%"}}>
+            style={{backgroundColor:"#FF00BF", paddingTop:"3%", paddingBottom:"3%", paddingLeft:"5%", paddingRight:"5%", borderRadius:50}}>
               <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", padding:"2%", fontWeight:"900"}}>
                 Lyft
               </Text>

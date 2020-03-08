@@ -54,7 +54,7 @@ export default function Cuisine({ navigation }) {
         <View style={{ flex: 1, top: "3.75%", width: "80%" }}>
           <TouchableOpacity
             onPress={() => navigation.navigate("Distance", { ...state })}
-            style={{backgroundColor:"#01ABE7", padding:"3%", borderRadius:"50%"}}>
+            style={{backgroundColor:"#01ABE7", padding:"3%", borderRadius:50}}>
 
             <Text style={{ position: "relative", color: "rgba(220,220,220, 1)", textAlign: "center", fontSize: 24, fontWeight: "900" }}>
               Next
