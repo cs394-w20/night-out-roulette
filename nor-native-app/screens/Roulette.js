@@ -142,6 +142,7 @@ export default function Roulette({ navigation, route }) {
 
         {rerolls < 2 ? 
         <View style={{flex: 1.3, top:"15%", flexDirection: 'row', left:"3%"}}>
+
           
           <TouchableOpacity
             onPress={() => navigation.navigate("Spinner", {rerolls: rerolls + 1, restaurantTwo: restaurantTwo, restaurantThree: restaurantThree})}
