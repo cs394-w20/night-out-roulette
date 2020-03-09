@@ -24,17 +24,17 @@ export default function Home({ navigation }) {
         style={{position:"absolute", width: "100%", height: "100%", opacity:1}}
       />
 
-      <Text style={{position:"relative", fontSize:40, color:"white", bottom:"35%", textAlign:"center", fontWeight:"900"}}>
+      <Text style={{position:"relative", fontSize:40, color:"white", bottom:"25%", textAlign:"center", fontWeight:"900"}}>
         Night Out Roulette!
       </Text>
       
-      <View style={{top:"38%", width:"80%"}}>
+      <View style={{top:"25%", width:"80%", marginBottom:"5%"}}>
         <TouchableOpacity
           onPress={() => navigation.navigate('Spinner', SurpriseMe())}
           // style={styles.button}
-          style={{backgroundColor:"#FFC400", padding:"3%", borderRadius:50}}
+          style={{backgroundColor:"#FFC400", padding:"5%", borderRadius:50}}
           >
-            <Text style={{position:"relative", color:"#FE0008", textAlign:"center", fontSize:24, fontWeight:"900"}}>
+            <Text style={{position:"relative", color:"#FE0008", textAlign:"center", fontSize:24, fontWeight:"600"}}>
               Surprise me!
             </Text>
         </TouchableOpacity>
@@ -43,9 +43,9 @@ export default function Home({ navigation }) {
       <View style={{top:"25%", width:"80%"}}>
         <TouchableOpacity
           onPress={() => navigation.navigate("Cuisine")}
-          style={{backgroundColor:"#01ABE7", padding:"3%", borderRadius:50}}>
+          style={{backgroundColor:"#01ABE7", padding:"5%", borderRadius:50}}>
             
-            <Text style={{position:"relative", color:"white", textAlign:"center", fontSize:24, fontWeight:"900"}}>
+            <Text style={{position:"relative", color:"white", textAlign:"center", fontSize:24, fontWeight:"600"}}>
               Let's go for a spin!
             </Text>
         </TouchableOpacity>
