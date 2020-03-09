@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image, Linking, Platform, TouchableOpacity, BackHandler, Share } from "react-native";
-import { Rating } from 'react-native-ratings';
+import StarRating from 'react-native-star-rating';
 import shareicon from '../assets/shareicon.png';
 import spinnyGIF from '../assets/new1.gif'
 
@@ -23,6 +23,8 @@ export default function Roulette({ navigation, route }) {
   const [restaurantTwo, setRestaurantTwo] = useState(route.params.restaurantTwo)
   const [restaurantThree, setRestaurantThree] = useState(route.params.restaurantThree)
   const [rerolls, setrerolls] = useState(route.params.rerolls)
+
+  var test = {'name':'Peppercorns Kitchen', 'location': {'display_address':['620 Davis St', 'Evanston, IL 60201'] }, 'distance': 1609, 'rating':'4.5'}
 
   function goHome() {
     navigation.navigate('Home');
@@ -75,39 +77,35 @@ export default function Roulette({ navigation, route }) {
         }}
         style={{ width: "100%", height: "100%"}}
       />
-      <View style={{position:"absolute", paddingTop:"5%", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white", flexDirection:"column", alignItems:"center"}}>
-        <Text style={{position:'relative', flex:1, top:"7.5%", fontSize:30, color:"white", textAlign:"left", fontWeight:"600", left:"-5%"}}>
-          We Picked a Winner!
-        </Text>
+      <View style={{position:"absolute", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white", flexDirection:"column", alignItems:"center"}}>
+        <View style={{flexDirection:"row", flex:1, top:"20%"}}>
+          <Text style={{position:'relative', flex:1, fontSize:30, color:"white", textAlign:"left", fontWeight:"600", paddingLeft:"3%"}}>
+            We Picked a Winner!
+          </Text>
 
-        <TouchableOpacity
-          onPress={() => onShare(restaurant)}
-          style={{left:"40%", top:"-9%", textAlign:"right"}}>
-          <Image source={shareicon}/>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => onShare(restaurant)}
+            style={{textAlign:"right", paddingRight:"3%"}}>
+            <Image source={shareicon}/>
+          </TouchableOpacity>
+        </View>
 
         {/* Name and Address */}
-        <Text style={{flex:2, fontSize:25, position:"relative", backgroundColor:"rgba(0,0,0, 0.0)", bottom:"3%", width:"100%", color:"white", textAlign:"center"}}>
-            <Text style={{textTransform:"uppercase", fontWeight:"bold", fontSize:35}}>{restaurant['name']}</Text>{"\n"}
-          {restaurant['location']['display_address'][0]}{"\n"}
-          {restaurant['location']['display_address'][1]}{"\n"}
+        <View style={{flex:2, flexBasis:"auto", alignItems:"center"}}>
+          <Text style={{textTransform:"uppercase", fontWeight:"bold", fontSize:35, color:"white", textAlign:"center"}}>{restaurant['name']}</Text>
+          <Text style={{fontSize:25, color:"white", textAlign:"center"}}>{restaurant['location']['display_address'][0]+"\n"+restaurant['location']['display_address'][1]+'\n'}</Text>
+          <Text style={{fontSize:22, lineHeight:40, color:"white"}}>{(restaurant['distance']/1609.344).toFixed(1)} miles away </Text>
+          <StarRating
+            disabled={true}
+            fullStarColor="gold"
+            starSize={40}
+            maxStars={5}
+            starStyle={{paddingHorizontal:"1%"}}
+            rating={restaurant['rating']}
+          />
+        </View>
 
-
-          {/* <View style={{flex:1.5, flexDirection: 'row', justifyContent: 'space-around', alignItems:'center', width: "100%"}}> */}
-            <Text style={{fontSize:22, lineHeight:40}}>{(restaurant['distance']/1609.344).toFixed(1)} miles away </Text>
-            {/* <Rating
-              imageSize={20}
-              readonly
-              startingValue={restaurant['rating']}
-              style={{left:"40%"}}
-              ratingBackgroundColor='#c8c7c7'
-            /> */}
-            {/* </View> */}
-          {/* <Text style={{fontSize:22}}> STAR {restaurant['rating']}</Text> */}
-          
-        </Text>
-
-        <View style={{flex:1.5, flexDirection: 'row', justifyContent: 'space-around', alignItems:'center', width: "100%"}}>
+        <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-around', alignItems:'center', width: "100%"}}>
           <TouchableOpacity
             onPress={() => openRestaurant(restaurant['location']['display_address'])}
             style={{backgroundColor:"#01ABE7", paddingTop:"3%", paddingBottom:"3%", paddingLeft:"5%", paddingRight:"5%", borderRadius:50}}>
@@ -157,13 +155,6 @@ export default function Roulette({ navigation, route }) {
         : 
         
         <View style={{flex: 1.25, top:"15%", width:"70%", flexDirection:'row'}}>
-          {/* <TouchableOpacity
-            onPress={() => openRestaurant(restaurant['location']['display_address'])}
-            style={styles.button}>
-              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", paddingTop:"8%", fontWeight:"900"}}>
-                Let's go!
-              </Text>
-          </TouchableOpacity> */}
         </View>
         }
       </View>

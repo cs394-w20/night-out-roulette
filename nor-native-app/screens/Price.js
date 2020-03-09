@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
 export default function Price({ navigation, route }) {
-  const [state, setstate] = useState({ ...route.params, price: [], rerolls: 0 });
+  const [state, setstate] = useState({ ...route.params, price: ['$$$$'], rerolls: 0 });
   
   function Item({ title, selected, onSelect }) {
     return (
@@ -15,7 +15,6 @@ export default function Price({ navigation, route }) {
   
   const onSelect = React.useCallback(
     id => {
-      console.log(state);
       var currPrice = id;
       var allPrices = state.price;
       if(allPrices.includes(currPrice)) {
@@ -24,6 +23,7 @@ export default function Price({ navigation, route }) {
       else {
         setstate({ ...state, price: [...allPrices, currPrice]});
       }
+      console.log(state);
     },
     [state],
   );
