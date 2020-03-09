@@ -71,7 +71,6 @@ export default function Roulette({ navigation, route }) {
       <Image
         source={{
           uri:
-            // "https://www.marineroom.com/resourcefiles/homeimages/the-marine-room-restaurant-in-la-jolla-top11.jpg"
             "https://c6.staticflickr.com/6/5662/30514668293_d33f88e921_b.jpg"
         }}
         style={{ width: "100%", height: "100%"}}
