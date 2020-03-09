@@ -77,7 +77,7 @@ export default function Roulette({ navigation, route }) {
         style={{ width: "100%", height: "100%"}}
       />
       <View style={{position:"absolute", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white", flexDirection:"column", alignItems:"center"}}>
-        <View style={{flexDirection:"row", flex:1, top:"20%"}}>
+        <View style={{flexDirection:"row", flex:1, top:"15%"}}>
           <Text style={{position:'relative', flex:1, fontSize:30, color:"white", textAlign:"left", fontWeight:"600", paddingLeft:"3%"}}>
             We Picked a Winner!
           </Text>
