@@ -76,18 +76,18 @@ export default function Roulette({ navigation, route }) {
         style={{ width: "100%", height: "100%"}}
       />
       <View style={{position:"absolute", paddingTop:"5%", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white", flexDirection:"column", alignItems:"center"}}>
-        <Text style={{position:'relative', flex:1, top:"10%", fontSize:34, color:"white", textAlign:"left", fontWeight:"600", left:"-5%"}}>
+        <Text style={{position:'relative', flex:1, top:"7.5%", fontSize:30, color:"white", textAlign:"left", fontWeight:"600", left:"-5%"}}>
           We Picked a Winner!
         </Text>
 
         <TouchableOpacity
           onPress={() => onShare(restaurant)}
-          style={{left:"40%", top:"-10%", textAlign:"right"}}>
+          style={{left:"40%", top:"-9%", textAlign:"right"}}>
           <Image source={shareicon}/>
         </TouchableOpacity>
 
         {/* Name and Address */}
-        <Text style={{flex:1, fontSize:25, position:"relative", backgroundColor:"rgba(0,0,0, 0.6)", bottom:"3%", width:"100%", color:"white", textAlign:"center"}}>
+        <Text style={{flex:2, fontSize:25, position:"relative", backgroundColor:"rgba(0,0,0, 0.0)", bottom:"3%", width:"100%", color:"white", textAlign:"center"}}>
             <Text style={{textTransform:"uppercase", fontWeight:"bold", fontSize:35}}>{restaurant['name']}</Text>{"\n"}
           {restaurant['location']['display_address'][0]}{"\n"}
           {restaurant['location']['display_address'][1]}{"\n"}
@@ -141,13 +141,13 @@ export default function Roulette({ navigation, route }) {
 
 
         {rerolls < 2 ? 
-        <View style={{flex: 1.25, top:"15%", flexDirection: 'row'}}>
+        <View style={{flex: 1.3, top:"15%", flexDirection: 'row'}}>
           
           <TouchableOpacity
             onPress={() => navigation.navigate("Spinner", {rerolls: rerolls + 1, restaurantTwo: restaurantTwo, restaurantThree: restaurantThree})}
             style={styles.button2}>
-              <Image style={{width:"18%", height:"45%", left:"10%", bottom:"-69%"}} source={spinnyGIF}/>
-              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", paddingTop:"12%", fontWeight:"900"}}>
+              <Image style={{width:"18%", height:"45%", top:"10%", right:"5%", aspectRatio: 1}} source={spinnyGIF}/>
+              <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", paddingTop:"12%", fontWeight:"600"}}>
                 Reroll?
               </Text>
           </TouchableOpacity>
@@ -190,9 +190,8 @@ const styles = StyleSheet.create({
     marginHorizontal:'20%',
     height: '40%',
     marginLeft: '30%',
-    // backgroundColor: 'rgba(125, 33, 125, 1.0)',
-    // padding:10,
-    borderRadius: 50
+    borderRadius: 50,
+    flexDirection:"row"
   },
 });
 
