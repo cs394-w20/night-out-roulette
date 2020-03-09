@@ -71,7 +71,8 @@ export default function Roulette({ navigation, route }) {
       <Image
         source={{
           uri:
-            "https://www.marineroom.com/resourcefiles/homeimages/the-marine-room-restaurant-in-la-jolla-top11.jpg"
+            // "https://www.marineroom.com/resourcefiles/homeimages/the-marine-room-restaurant-in-la-jolla-top11.jpg"
+            "https://c6.staticflickr.com/6/5662/30514668293_d33f88e921_b.jpg"
         }}
         style={{ width: "100%", height: "100%"}}
       />
@@ -117,7 +118,7 @@ export default function Roulette({ navigation, route }) {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => AppLink.maybeOpenURL('uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]='+(restaurant['location']['display_address'][0]).replace(/ /g, '%20'),
+            onPress={() => AppLink.maybeOpenURL('uber://?client_id=jHQd0Xx0KGQ-jF3iCG8h9ap-Xlt8-8AP&action=setPickup&pickup=my_location&dropoff[formatted_address]='+(restaurant['location']['display_address'][0]).replace(/ /g, '%20'),
                                                 { appName:"Uber", appStoreId:"368677368", appStoreLocale:"us", playStoreId:"com.ubercab" })}
             // style={styles.button}
             style={{backgroundColor:"black", paddingTop:"3%", paddingBottom:"3%", paddingLeft:"5%", paddingRight:"5%", borderRadius:50}}>
@@ -141,7 +142,7 @@ export default function Roulette({ navigation, route }) {
 
 
         {rerolls < 2 ? 
-        <View style={{flex: 1.3, top:"15%", flexDirection: 'row'}}>
+        <View style={{flex: 1.3, top:"15%", flexDirection: 'row', left:"3%"}}>
           
           <TouchableOpacity
             onPress={() => navigation.navigate("Spinner", {rerolls: rerolls + 1, restaurantTwo: restaurantTwo, restaurantThree: restaurantThree})}
