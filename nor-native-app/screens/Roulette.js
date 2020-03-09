@@ -76,13 +76,13 @@ export default function Roulette({ navigation, route }) {
         style={{ width: "100%", height: "100%"}}
       />
       <View style={{position:"absolute", paddingTop:"5%", width:"100%", height:"100%", backgroundColor:"rgba(0,0,0, 0.4)", color:"white", flexDirection:"column", alignItems:"center"}}>
-        <Text style={{position:'relative', flex:1, top:"5%", fontSize:34, color:"white", textAlign:"left", fontWeight:"600"}}>
+        <Text style={{position:'relative', flex:1, top:"10%", fontSize:34, color:"white", textAlign:"left", fontWeight:"600", left:"-5%"}}>
           We Picked a Winner!
         </Text>
 
         <TouchableOpacity
           onPress={() => onShare(restaurant)}
-          style={{left:"40%", top:"-14%"}}>
+          style={{left:"40%", top:"-10%", textAlign:"right"}}>
           <Image source={shareicon}/>
         </TouchableOpacity>
 
