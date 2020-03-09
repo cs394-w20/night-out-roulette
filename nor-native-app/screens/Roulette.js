@@ -23,8 +23,7 @@ export default function Roulette({ navigation, route }) {
   const [restaurantTwo, setRestaurantTwo] = useState(route.params.restaurantTwo)
   const [restaurantThree, setRestaurantThree] = useState(route.params.restaurantThree)
   const [rerolls, setrerolls] = useState(route.params.rerolls)
-
-  var test = {'name':'Peppercorns Kitchen', 'location': {'display_address':['620 Davis St', 'Evanston, IL 60201'] }, 'distance': 1609, 'rating':'4.5'}
+  
 
   function goHome() {
     navigation.navigate('Home');
@@ -57,8 +56,8 @@ export default function Roulette({ navigation, route }) {
           <View style={{flex: 1.25, top:"17%", width:"70%", flexDirection:'row'}}>
             <TouchableOpacity
               onPress={() => navigation.navigate('Cuisine')}
-              style={styles.button}>
-                <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", fontWeight:"900"}}>
+              style={{...styles.button, alignItems:"center", justifyContent:"center"}}>
+                <Text style={{position:"relative", fontSize:24, color:"rgba(220,220,220, 1)", textAlign:"center", fontWeight:"600",}}>
                   Try Again?
                 </Text>
             </TouchableOpacity>
@@ -105,7 +104,7 @@ export default function Roulette({ navigation, route }) {
           />
         </View>
 
-        <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-around', alignItems:'center', width: "100%"}}>
+        <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-around', alignItems:'center', width: "100%", top:"15%"}}>
           <TouchableOpacity
             onPress={() => openRestaurant(restaurant['location']['display_address'])}
             style={{backgroundColor:"#01ABE7", paddingTop:"3%", paddingBottom:"3%", paddingLeft:"5%", paddingRight:"5%", borderRadius:50}}>
