@@ -8,6 +8,8 @@ import { Audio } from 'expo-av';
 
 export default function Spinner({ navigation, route }) {
 
+  console.disableYellowBox = true;
+
   const [restaurant, setRestaurant] = useState(null);
   const [restaurantTwo, setRestaurantTwo] = useState(null);
   const [restaurantThree, setRestaurantThree] = useState(null);
@@ -45,8 +47,11 @@ export default function Spinner({ navigation, route }) {
         .then(response => {
           responseData = response.businesses;
   
-          if(!responseData || responseData.length === 0) {
+          if(!responseData) {
             setRestaurant(false);
+            setRestaurantTwo(false);
+            setRestaurantThree(false);
+
           }
 
           const randomNum = Math.floor(Math.random() * responseData.length);
@@ -63,7 +68,6 @@ export default function Spinner({ navigation, route }) {
             randomNum3 = Math.floor(Math.random() * responseData.length);
           }
 
-          console.log(responseData[randomNum]);
           setRestaurantTwo(responseData[randomNum2]);
           setRestaurantThree(responseData[randomNum3]);
           setRestaurant(responseData[randomNum]);
