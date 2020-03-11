@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
-import { REACT_APP_API_KEY } from "react-native-dotenv";
+import { YELP_API_KEY } from "react-native-dotenv";
 import spinnyGIF from '../assets/new1.gif'
 import { Vibration } from 'react-native'
 import { Audio } from 'expo-av';
@@ -40,7 +40,7 @@ export default function Spinner({ navigation, route }) {
       fetch(queryString, {
         method: "GET",
         headers: {
-          Authorization: "Bearer " + REACT_APP_API_KEY
+          Authorization: "Bearer " + YELP_API_KEY
         }
       })
         .then(response => response.json())
