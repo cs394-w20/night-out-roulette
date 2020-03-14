@@ -8,8 +8,8 @@ Night Out Roulette is an restaurant finder app built in React Native with Expo.
 It exercises the [Yelp Business Endpoint API](https://www.yelp.com/developers/documentation/v3/business_search) to find restaurants based on factors like cuisine type, maximum distance, price range, and more.
 
 ## System Requirements
-- NodeJS 10.16+ (latest release recommended)
-- NPM 6.2+ (latest release recommended)
+- [NodeJS 10.16+ (latest release recommended)](https://nodejs.org/en/)
+- NPM 6.2+ (latest release recommended, comes with NodeJS)
 
 ## Running
 Before starting, obtain an API key for the Yelp Business Endpoint. Store the key like so in a .env file in the root of the directory:
