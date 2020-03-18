@@ -13,7 +13,7 @@ Night Out Roulette exercises the [Yelp Business Endpoint API](https://www.yelp.c
 - [Expo Client app on a mobile device](https://expo.io/tools)
 
 ## Running
-Before starting, obtain an API key for the Yelp Business Endpoint. Store the key like so in a .env file in the root of the directory. Make sure to also add the .env file to a .gitignore so as not to publish sensitive data to Github:
+Before starting, obtain an API key for the Yelp Business Endpoint. Store the key like below in a [.env file](https://medium.com/chingu/an-introduction-to-environment-variables-and-how-to-use-them-f602f66d15fa) (a type of file used to store environmental variables, such as passwords and API keys) in the root of the directory. Make sure to also add the .env file to a .gitignore so as not to publish sensitive data to Github:
 
 ```
 YELP_API_KEY = <API_KEY_HERE>
